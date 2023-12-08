@@ -32,6 +32,7 @@ const config = {
         '**': 'NEXT_JS_APP_ROUTER_CASE',
       },
     ],
+    'prettier/prettier': 'off',
   },
   ignorePatterns: ['client/generated/**/*.ts'],
 };
