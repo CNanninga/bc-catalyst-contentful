@@ -35,10 +35,10 @@ export const StoreLogo = ({ data }: Props) => {
     <BcImage
       alt={logo.image.altText ? logo.image.altText : storeName}
       className="max-h-16 object-contain"
-      height={32}
+      height={150}
       priority
       src={logo.image.url}
-      width={155}
+      width={300}
     />
   );
 };
