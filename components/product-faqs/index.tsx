@@ -1,5 +1,11 @@
 'use client';
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@bigcommerce/components/accordion';
 import { useState } from 'react';
 
 import { getProductFaqMetafields } from '~/client/queries/get-product-faq-metafields';
@@ -17,18 +23,15 @@ const ProductFaqs = ({
 
   return (
     <>
-      {faqs.map((faq) => (
-        <div className="my-4" key={faq.key}>
-          <div>
-            <label className="font-bold">Question:</label>
-            <span> {faq.question}</span>
-          </div>
-          <div>
-            <label className="font-bold">Answer:</label>
-            <span> {faq.answer}</span>
-          </div>
-        </div>
-      ))}
+      <Accordion type="multiple">
+        {faqs.map((faq) => (
+          <AccordionItem className="my-2 border border-gray-200 p-2"
+            key={faq.key} value={faq.key}>
+            <AccordionTrigger>{faq.question}</AccordionTrigger>
+            <AccordionContent>{faq.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </>
   );
 };
