@@ -11,6 +11,7 @@ import { BreadCrumbs } from './_components/breadcrumbs';
 import { Description } from './_components/description';
 import { Details } from './_components/details';
 import Faqs from './_components/faqs';
+import FaqsLoading from './_components/faqs/loading';
 import { Gallery } from './_components/gallery';
 import { RelatedProducts } from './_components/related-products';
 import { Reviews } from './_components/reviews';
@@ -94,7 +95,9 @@ export default async function Product({ params, searchParams }: ProductPageProps
 
             <h2 className="text-h5 my-4">Frequently Asked Questions</h2>
             <div className="mx-auto md:w-2/3">
-              <Faqs productId={product.entityId} />
+              <Suspense fallback={<FaqsLoading />}>
+                <Faqs productId={product.entityId} />
+              </Suspense>
             </div>
 
             <Suspense fallback={t('loading')}>
