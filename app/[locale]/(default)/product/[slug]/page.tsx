@@ -10,6 +10,7 @@ import { LocaleType } from '~/i18n';
 import { BreadCrumbs } from './_components/breadcrumbs';
 import { Description } from './_components/description';
 import { Details } from './_components/details';
+import Faqs from './_components/faqs';
 import { Gallery } from './_components/gallery';
 import { RelatedProducts } from './_components/related-products';
 import { Reviews } from './_components/reviews';
@@ -90,6 +91,12 @@ export default async function Product({ params, searchParams }: ProductPageProps
           <div className="lg:col-span-2">
             <Description product={product} />
             <Warranty product={product} />
+
+            <h2 className="text-h5 my-4">Frequently Asked Questions</h2>
+            <div className="mx-auto md:w-2/3">
+              <Faqs productId={product.entityId} />
+            </div>
+
             <Suspense fallback={t('loading')}>
               <Reviews productId={product.entityId} />
             </Suspense>
