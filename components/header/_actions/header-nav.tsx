@@ -9,6 +9,7 @@ import { ChevronDown, User } from 'lucide-react';
 
 import { getSessionCustomerId } from '~/auth';
 import { getCategoryTree } from '~/client/queries/get-category-tree';
+import { getWebPages } from '~/client/queries/get-web-pages';
 import { Link } from '~/components/link';
 import { cn } from '~/lib/utils';
 
@@ -22,8 +23,34 @@ export const HeaderNav = async ({
   // To prevent the navigation menu from overflowing, we limit the number of categories to 6.
   // To show a full list of categories, modify the `slice` method to remove the limit.
   // Will require modification of navigation menu styles to accommodate the additional categories.
-  const categoryTree = (await getCategoryTree()).slice(0, 6);
+  const categoryTree = (await getCategoryTree()).slice(0, 4);
+  const webPages = (await getWebPages()).slice(0, 2);
   const customerId = await getSessionCustomerId();
+
+  const navItems = categoryTree.map((category) => {
+    return {
+      name: category.name, 
+      path: category.path, 
+      children: category.children.map((childCategory1) => {
+        return {
+          name: childCategory1.name,
+          path: childCategory1.path,
+          children: childCategory1.children.map((childCategory2) => {
+            return {
+              name: childCategory2.name,
+              path: childCategory2.path,
+            }
+          }),
+        }
+      }),
+    };
+  }).concat(webPages.map((webPage) => {
+    return {
+      name: webPage.name,
+      path: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+      children: [],
+    }
+  }));
 
   return (
     <>
@@ -34,15 +61,15 @@ export const HeaderNav = async ({
           className,
         )}
       >
-        {categoryTree.map((category) => (
-          <NavigationMenuItem className={cn(inCollapsedNav && 'w-full')} key={category.path}>
-            {category.children.length > 0 ? (
+        {navItems.map((navItem) => (
+          <NavigationMenuItem className={cn(inCollapsedNav && 'w-full')} key={navItem.path}>
+            {navItem.children.length > 0 ? (
               <>
                 <NavigationMenuTrigger className="gap-0 p-0">
                   <>
                     <NavigationMenuLink asChild>
-                      <Link className="grow" href={category.path}>
-                        {category.name}
+                      <Link className="grow" href={navItem.path}>
+                        {navItem.name}
                       </Link>
                     </NavigationMenuLink>
                     <span className={cn(inCollapsedNav && 'p-3')}>
@@ -59,17 +86,17 @@ export const HeaderNav = async ({
                     inCollapsedNav && 'ps-3',
                   )}
                 >
-                  {category.children.map((childCategory1) => (
-                    <ul className={cn(inCollapsedNav && 'pb-4')} key={childCategory1.entityId}>
+                  {navItem.children.map((childNavItem1) => (
+                    <ul className={cn(inCollapsedNav && 'pb-4')} key={childNavItem1.path}>
                       <NavigationMenuItem>
-                        <NavigationMenuLink href={childCategory1.path}>
-                          {childCategory1.name}
+                        <NavigationMenuLink href={childNavItem1.path}>
+                          {childNavItem1.name}
                         </NavigationMenuLink>
                       </NavigationMenuItem>
-                      {childCategory1.children.map((childCategory2) => (
-                        <NavigationMenuItem key={childCategory2.entityId}>
-                          <NavigationMenuLink className="font-normal" href={childCategory2.path}>
-                            {childCategory2.name}
+                      {childNavItem1.children.map((childNavItem2) => (
+                        <NavigationMenuItem key={childNavItem2.path}>
+                          <NavigationMenuLink className="font-normal" href={childNavItem2.path}>
+                            {childNavItem2.name}
                           </NavigationMenuLink>
                         </NavigationMenuItem>
                       ))}
@@ -79,7 +106,7 @@ export const HeaderNav = async ({
               </>
             ) : (
               <NavigationMenuLink asChild>
-                <Link href={category.path}>{category.name}</Link>
+                <Link href={navItem.path}>{navItem.name}</Link>
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
