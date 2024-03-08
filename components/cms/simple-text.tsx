@@ -1,7 +1,7 @@
 import RichText from '~/components/cms/rich-text';
-import { ContentfulBlock } from '~/lib/contentful/api';
+import { BlockRichTextContent, BlockSimpleText } from '~/contentful-client/generated/graphql';
 
-export default function SimpleText({ className, block }: {className?: string, block: ContentfulBlock}) {
+export default function SimpleText({ className, block }: {className?: string, block: Partial<BlockSimpleText>}) {
   let sizeClass;
 
   switch (block.size) {
@@ -29,5 +29,6 @@ export default function SimpleText({ className, block }: {className?: string, bl
     return '';
   }
 
-  return <RichText className={`${className ?? ''} ${sizeClass}`} content={block.content} />;
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  return <RichText className={`${className ?? ''} ${sizeClass}`} content={block.content as BlockRichTextContent} />;
 }

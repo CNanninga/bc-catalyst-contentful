@@ -1,6 +1,6 @@
-import { ContentfulBlock } from "~/lib/contentful/api";
+import { BlockImage } from "~/contentful-client/generated/graphql";
 
-export default function ImageBlock({ className, block }: { className?: string, block: ContentfulBlock }) {
+export default function ImageBlock({ className, block }: { className?: string, block: Partial<BlockImage> }) {
   let sizeClass;
   let imgSize;
 
@@ -38,7 +38,7 @@ export default function ImageBlock({ className, block }: { className?: string, b
     <div className={`${className ?? ''} ${sizeClass} mx-auto block`}>
       {
         // eslint-disable-next-line @next/next/no-img-element
-      }<img alt={block.image.description} src={`${block.image.url}?w=${imgSize}`} />
+      }<img alt={block.image.description ?? ''} src={`${block.image.url ?? ''}?w=${imgSize}`} />
     </div>
   );
 }

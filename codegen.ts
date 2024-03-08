@@ -42,19 +42,56 @@ const getEndpoint = () => {
   return `https://store-${storeHash}-${channelId}.${graphqlApiDomain}/graphql`;
 };
 
+const getContentfulEndpoint = () => {
+  const spaceId = process.env.CONTENTFUL_SPACE_ID;
+  return `https://graphql.contentful.com/content/v1/spaces/${spaceId ?? ''}`;
+};
+
+const getContentfulToken = () => {
+  const token = process.env.CONTENTFUL_ACCESS_TOKEN;
+  return token ?? '';
+};
+
 const config: CodegenConfig = {
-  schema: [
-    {
-      [getEndpoint()]: {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
+  generates: {
+    './client/generated/': {
+      schema: [
+        {
+          [getEndpoint()]: {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+            },
+          },
+        },
+      ],
+      documents: ['client/queries/**/*.ts', 'client/mutations/**/*.ts', 'client/fragments/**/*.ts'],
+      preset: 'client',
+      presetConfig: {
+        fragmentMasking: false,
+      },
+      config: {
+        documentMode: 'string',
+        avoidOptionals: {
+          field: true,
+        },
+        scalars: {
+          DateTime: 'string',
+          Long: 'number',
+          BigDecimal: 'number',
         },
       },
     },
-  ],
-  documents: ['client/queries/**/*.ts', 'client/mutations/**/*.ts', 'client/fragments/**/*.ts'],
-  generates: {
-    './client/generated/': {
+    './contentful-client/generated/': {
+      schema: [
+        {
+          [getContentfulEndpoint()]: {
+            headers: {
+              Authorization: `Bearer ${getContentfulToken()}`,
+            },
+          },
+        },
+      ],
+      documents: ['contentful-client/queries/**/*.ts', 'contentful-client/mutations/**/*.ts', 'contentful-client/fragments/**/*.ts'],
       preset: 'client',
       presetConfig: {
         fragmentMasking: false,
@@ -72,6 +109,22 @@ const config: CodegenConfig = {
       },
     },
     './schema.graphql': {
+      schema: [
+        {
+          [getEndpoint()]: {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+            },
+          },
+        },
+        {
+          [getContentfulEndpoint()]: {
+            headers: {
+              Authorization: `Bearer ${getContentfulToken()}`,
+            },
+          },
+        },
+      ],
       plugins: ['schema-ast'],
       watchPattern: '',
     },

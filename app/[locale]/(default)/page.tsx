@@ -6,7 +6,7 @@ import { getNewestProducts } from '~/client/queries/get-newest-products';
 import { ProductCardCarousel } from '~/components/product-card-carousel';
 import { LocaleType } from '~/i18n';
 
-import { getContentBlocks } from '~/lib/contentful/api';
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
 import CmsContent from '~/components/cms/cms-content';
 
 interface Props {
@@ -23,7 +23,7 @@ export default async function Home({ params: { locale } }: Props) {
   const [newestProducts, featuredProducts, cmsContent] = await Promise.all([
     getNewestProducts({ imageWidth: 500, imageHeight: 500 }),
     getFeaturedProducts({ imageWidth: 500, imageHeight: 500 }),
-    getContentBlocks('home', 'home'),
+    getCategoryContent('home', 'home'),
   ]);
 
   return (

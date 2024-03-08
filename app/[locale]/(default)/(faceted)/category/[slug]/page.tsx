@@ -15,7 +15,7 @@ import { SortBy } from '../../_components/sort-by';
 import { SubCategories } from '../../_components/sub-categories';
 import { fetchFacetedSearch } from '../../fetch-faceted-search';
 
-import { getContentBlocks } from '~/lib/contentful/api';
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
 import CmsContent from '~/components/cms/cms-content';
 
 interface Props {
@@ -65,7 +65,7 @@ export default async function Category({ params: { locale, slug }, searchParams 
   const { hasNextPage, hasPreviousPage, endCursor, startCursor } = productsCollection.pageInfo;
 
   const catPath = category.path.replace(/(\/$)/, '').replace(/^\//, '');
-  const cmsContent = await getContentBlocks('category', catPath);
+  const cmsContent = await getCategoryContent('category', catPath);
 
   return (
     <div>

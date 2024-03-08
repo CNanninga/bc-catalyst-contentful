@@ -1,25 +1,27 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Block, BLOCKS, Document, Inline } from '@contentful/rich-text-types';
-import { ContentfulLinks } from '~/lib/contentful/api';
+import { BlockRichTextContent } from '~/contentful-client/generated/graphql';
 
-function RichTextAsset({ id, content }: { id: string, content: { links?: ContentfulLinks } }) {
-  const assetLinks = content.links?.assets?.block ?? [];
+function RichTextAsset({ id, content }: { id: string, content: Partial<BlockRichTextContent> }) {
+  const assetLinks = content.links?.assets.block ?? [];
 
-  const asset = assetLinks.find((ast) => ast.sys?.id === id);
+  const asset = assetLinks.find((ast) => ast?.sys.id === id);
 
   return asset?.url ? (
     <>
       {
         // eslint-disable-next-line @next/next/no-img-element
-      }<img alt={asset.description} className="mx-auto block" src={asset.url} />
+      }<img alt={asset.description ?? ''} className="mx-auto block" src={asset.url} />
     </>
   ) : null;
 }
 
-export default function RichText({ content, className }: { content: { json: Document, links?: ContentfulLinks }, className?: string }) {
+export default function RichText({ content, className }: { content: Partial<BlockRichTextContent>, className?: string }) {
   return (
     <div className={`${className ?? ''} prose dark:prose-invert`}>
-      {documentToReactComponents(content.json, {
+      {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      documentToReactComponents(content.json as Document, {
         renderNode: {
           [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
             const { data } = node;
@@ -30,7 +32,8 @@ export default function RichText({ content, className }: { content: { json: Docu
             )
           }
         }
-      })}
+      })
+      }
     </div>
   );
 }

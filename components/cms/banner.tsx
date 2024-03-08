@@ -1,7 +1,7 @@
 import RichText from '~/components/cms/rich-text';
-import { ContentfulBlock } from '~/lib/contentful/api';
+import { BlockBanner } from '~/contentful-client/generated/graphql';
 
-export default function Banner({ className, block }: {className?: string, block: ContentfulBlock}) {
+export default function Banner({ className, block }: {className?: string, block: Partial<BlockBanner>}) {
     const { heading, imagePosition, backgroundColor, style, content, image } = block;
 
     const bgClass = style === 'light' ? `bg-${backgroundColor ?? ''}-200` : `bg-${backgroundColor ?? ''}-800`;

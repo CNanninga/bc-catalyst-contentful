@@ -37,6 +37,7 @@ next-env.d.ts
 
 # generated
 client/generated
+contentful-client/generated
 schema.graphql
 
 # secrets

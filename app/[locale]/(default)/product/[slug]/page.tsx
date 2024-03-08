@@ -17,7 +17,7 @@ import { RelatedProducts } from './_components/related-products';
 import { Reviews } from './_components/reviews';
 import { Warranty } from './_components/warranty';
 
-import { getContentBlocks } from '~/lib/contentful/api';
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
 import CmsContent from '~/components/cms/cms-content';
 
 interface ProductPageProps {
@@ -79,7 +79,7 @@ export default async function Product({ params, searchParams }: ProductPageProps
     return notFound();
   }
 
-  const cmsContent = await getContentBlocks('product', product.sku);
+  const cmsContent = await getCategoryContent('product', product.sku);
 
   return (
     <>
