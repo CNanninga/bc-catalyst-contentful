@@ -81,6 +81,10 @@ export default async function Product({ params, searchParams }: ProductPageProps
 
   const cmsContent = await getCategoryContent('product', product.sku);
 
+  const faqTranslations = {
+    "loadMore": t('FAQ.loadMore'),
+  };
+
   return (
     <>
       <BreadCrumbs productId={product.entityId} />
@@ -93,10 +97,10 @@ export default async function Product({ params, searchParams }: ProductPageProps
             <Description product={product} />
             <Warranty product={product} />
 
-            <h2 className="text-h5 my-4">Frequently Asked Questions</h2>
+            <h2 className="text-h5 my-4">{t('FAQ.heading')}</h2>
             <div className="mx-auto md:w-2/3">
               <Suspense fallback={<FaqsLoading />}>
-                <Faqs productId={product.entityId} />
+                <Faqs productId={product.entityId} t={faqTranslations} />
               </Suspense>
             </div>
 

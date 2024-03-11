@@ -19,10 +19,12 @@ const ProductFaqs = ({
   productId,
   limit,
   faqData,
+  t
 }: {
   productId: number;
   limit: number;
   faqData: Awaited<ReturnType<typeof getProductFaqMetafields>>;
+  t: { [key: string]: string };
 }) => {
   const [faqs, setFaqs] = useState(faqData.faqs);
   const [endCursor, setEndCursor] = useState(faqData.endCursor);
@@ -67,7 +69,7 @@ const ProductFaqs = ({
           {pending ? (
             <Spinner aria-hidden="true" className="mx-auto animate-spin" />
           ) : (
-            <span>Load more</span>
+            <span>{t.loadMore ?? 'Load more'}</span>
           )}
         </Button>
       )}

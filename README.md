@@ -19,7 +19,7 @@ Banner content loaded from Contentful for:
 
 ### Product FAQs
 
-Custom query/component to load "FAQs" on product detail page.
+Custom query/component to load "FAQs" on product detail page. With locale support for static strings.
 
 Requires metafields on a product matching the following details:
 

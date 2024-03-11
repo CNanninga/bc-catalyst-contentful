@@ -84,8 +84,8 @@
       "compare": "Compare"
     },
     "FAQ": {
-      "heading": "Frequently Asked Questions",
-      "loadMore": "Load more"
+      "heading": "Questions fréquemment posées",
+      "loadMore": "Charger plus"
     }
   },
   "Compare": {
@@ -119,29 +119,6 @@
       "add": "Add",
       "change": "Change",
       "cancel": "Cancel"
-    },
-    "ShippingInfo": {
-      "country": "Country",
-      "countryPlaceholder": "Select county",
-      "state": "State/province",
-      "statePlaceholder": "State/province...",
-      "city": "Suburb/city",
-      "cityPlaceholder": "State/province...",
-      "postcode": "Zip/Postcode",
-      "postcodePlaceholder": "State/province..."
-    },
-    "SubmitShippingInfo": {
-      "spinnerText": "Submitting...",
-      "submitText": "Estimate shipping"
-    },
-    "ShippingCost": {
-      "shippingOptions": "Available options",
-      "radioGroupAriaLabel": "Available shipping options",
-      "errorMessage": "There are no available options for shipping. Please check provided details and try again!"
-    },
-    "SubmitShippingCost": {
-      "spinnerText": "Submitting...",
-      "submitText": "Update shipping costs"
     }
   },
   "Search": {
@@ -152,15 +129,6 @@
     "searchResults": "Search results for"
   },
   "Account": {
-    "Home": {
-      "heading": "My Account",
-      "orders": "Orders",
-      "messages": "Messages",
-      "addresses": "Addresses",
-      "wishlists": "Wish lists",
-      "recentlyViewed": "Recently viewed",
-      "accountSettings": "Account settings"
-    },
     "Login": {
       "heading": "Log In",
       "Form": {
@@ -173,15 +141,15 @@
         "logIn": "Log in",
         "forgotPassword": "Forgot your password?"
       },
-      "CreateAccount": {
-        "heading": "New customer?",
-        "accountBenefits": "Create an account with us and you'll be able to:",
-        "fastCheckout": "Check out faster",
-        "multipleAddresses": "Save multiple shipping addresses",
-        "ordersHistory": "Access your order history",
-        "ordersTracking":  "Track new orders",
-        "wishlists": "Save items to your Wish List",
-        "createLink": "Create Account "
+      "Account": {
+        "newCustomer": "New customer?",
+        "createAccountCTA": "Create an account with us and you'll be able to:",
+        "checkFaster": "Check out faster",
+        "saveAddresses": "Save multiple shipping addresses",
+        "orderHistory": "Access your order history",
+        "trackOrders":  "Track new orders",
+        "saveToWishList": "Save items to your Wish List",
+        "createAccount": "Create Account "
       }
     }
   },
