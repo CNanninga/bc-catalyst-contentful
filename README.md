@@ -8,6 +8,7 @@ See main README-Catalyst.md.
 
 * **Custom Registration** - New customer account can be registered. Navigate from login page.
 * **Maintain Customer Session on Checkout** - Customer Login API used to log into BC storefront with current customer's ID before redirecting for checkout.
+* **Set locale in env vars**
 
 ### Contentful Integration
 
@@ -53,3 +54,4 @@ Additional environment vars:
 * `CONTENTFUL_SPACE_ID`
 * `CONTENTFUL_ACCESS_TOKEN`
 * `JWT_SECRET`
+* `LOCALE`

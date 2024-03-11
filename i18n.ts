@@ -7,14 +7,14 @@ enum LocalePrefixes {
   ASNEEDED = 'as-needed', // removes prefix on default locale
 }
 
-const locales = ['en'] as const;
-
 type LocalePrefixesType = `${LocalePrefixes}`;
 
 // Temporary we use NEVER prefix to prioritize accept-language header
 // & disable internationalized routes due to incomplete multilingual implementation
 const localePrefix: LocalePrefixesType = LocalePrefixes.NEVER;
-const defaultLocale = 'en';
+const defaultLocale = process.env.LOCALE ?? 'en';
+
+const locales = [defaultLocale] as const;
 
 type LocaleType = (typeof locales)[number];
 
