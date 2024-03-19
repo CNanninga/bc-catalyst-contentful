@@ -40,8 +40,7 @@ export default function Login({ params: { locale } }: Props) {
           <Button asChild className="w-fit items-center px-8 py-2">
             <Link
               href={{
-                pathname: '/login',
-                query: { action: 'create_account' },
+                pathname: '/register',
               }}
             >
               {t('CreateAccount.createLink')}
