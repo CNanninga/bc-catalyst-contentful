@@ -8,6 +8,12 @@ dependencies:
   '@bigcommerce/catalyst-client':
     specifier: ^0.1.1
     version: 0.1.1
+  '@contentful/rich-text-react-renderer':
+    specifier: 15.9.0
+    version: 15.9.0(react-dom@18.2.0)(react@18.2.0)
+  '@contentful/rich-text-types':
+    specifier: 16.3.0
+    version: 16.3.0
   '@graphql-typed-document-node/core':
     specifier: ^3.2.0
     version: 3.2.0(graphql@16.8.1)
@@ -1012,6 +1018,28 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@contentful/rich-text-react-renderer@15.9.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-TOGbtZrtHl5AAb6nIW5Q8ZOVn/NYwkbk5/o89PQdDWoLesH9vpM8pEaPqaEwSVRiCNW9t6a/j0PnUUxtxBmkcQ==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      react: ^16.8.6 || ^17.0.0
+      react-dom: ^16.8.6 || ^17.0.0
+    dependencies:
+      '@contentful/rich-text-types': 15.15.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@contentful/rich-text-types@15.15.1:
+    resolution: {integrity: sha512-oheW0vkxWDuKBIIXDeJfZaRYo+NzKbC4gETMhH+MGJd4nfL9cqrOvtRxZBgnhICN4vDpH4my/zUIZGKcFqGSjQ==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
+  /@contentful/rich-text-types@16.3.0:
+    resolution: {integrity: sha512-OfQmAu5bxE0CgQA3WlUleVej+ifFG/iXmB2DmUl4EyWyFue1aiIvfjxQhcDRSH4n1jUNMJ6L1wInZL8uV5m3TQ==}
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   /@emnapi/runtime@0.45.0:
     resolution: {integrity: sha512-Txumi3td7J4A/xTTwlssKieHKTGl3j4A1tglBx72auZ49YK7ePY6XZricgIg9mnZT4xPfA+UPCUdnhRuEFDL+w==}

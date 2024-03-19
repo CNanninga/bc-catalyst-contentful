@@ -15,6 +15,9 @@ import { RelatedProducts } from './_components/related-products';
 import { Reviews } from './_components/reviews';
 import { Warranty } from './_components/warranty';
 
+import { getContentBlocks } from '~/lib/contentful/api';
+import CmsContent from '~/components/cms/cms-content';
+
 interface ProductPageProps {
   params: { slug: string; locale: LocaleType };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -74,6 +77,8 @@ export default async function Product({ params, searchParams }: ProductPageProps
     return notFound();
   }
 
+  const cmsContent = await getContentBlocks('product', product.sku);
+
   return (
     <>
       <BreadCrumbs productId={product.entityId} />
@@ -81,6 +86,7 @@ export default async function Product({ params, searchParams }: ProductPageProps
         <NextIntlClientProvider locale={locale} messages={{ Product: messages.Product ?? {} }}>
           <Gallery noImageText={t('noGalleryText')} product={product} />
           <Details product={product} />
+          {cmsContent.length > 0 && <CmsContent blocks={cmsContent} className="lg:col-span-2 mx-8" />}
           <div className="lg:col-span-2">
             <Description product={product} />
             <Warranty product={product} />
