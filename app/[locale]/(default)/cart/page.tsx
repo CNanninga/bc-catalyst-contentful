@@ -1,4 +1,3 @@
-import { Button } from '@bigcommerce/components/button';
 import { Trash2 as Trash } from 'lucide-react';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
@@ -6,7 +5,6 @@ import { NextIntlClientProvider, useTranslations } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 
-import { getCheckoutUrl } from '~/client/management/get-checkout-url';
 import { getCart } from '~/client/queries/get-cart';
 import { LocaleType } from '~/i18n';
 
@@ -14,6 +12,8 @@ import { getShippingCountries } from './_actions/get-shipping-countries';
 import { removeProduct } from './_actions/remove-products';
 import { CartItemCounter } from './_components/cart-item-counter';
 import { CheckoutSummary, ShippingCosts } from './_components/checkout-summary';
+
+import CheckoutButton from '~/components/cart/checkout-button';
 
 export const metadata = {
   title: 'Cart',
@@ -30,16 +30,6 @@ const EmptyCart = () => {
         <p className="text-center">{t('emptyDetails')}</p>
       </div>
     </div>
-  );
-};
-
-const CheckoutButton = async ({ cartId, label }: { cartId: string; label: string }) => {
-  const checkoutUrl = await getCheckoutUrl(cartId);
-
-  return (
-    <Button asChild className="mt-6">
-      <a href={checkoutUrl}>{label}</a>
-    </Button>
   );
 };
 

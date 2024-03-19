@@ -5,14 +5,16 @@ import {
     FieldLabel,
     Form,
     FormSubmit,
-} from '@bigcommerce/components/Form';
-import { Input } from '@bigcommerce/components/Input';
+} from '@bigcommerce/components/form';
+import { Input } from '@bigcommerce/components/input';
+import { redirect } from 'next/navigation';
 
 import submitRegisterAccount from './_actions/submit-register-account';
 
 export const RegisterAccount = () => {
     const onSubmit = async (formData: FormData) => {
         await submitRegisterAccount(formData);
+        redirect('/login');
     };
 
     return (

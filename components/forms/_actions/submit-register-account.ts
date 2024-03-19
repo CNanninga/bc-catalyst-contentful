@@ -1,8 +1,7 @@
 'use server';
 
 import { z } from 'zod';
-import { customOldClient } from '~/client';
-import storeCustomerSession from '~/actions/storeCustomerSession';
+import { createCustomer } from '~/client/management/create-customer';
 
 const CustomerAccountSchema = z.object({
     email: z.string().email(),
@@ -25,11 +24,7 @@ export default async function submitRegisterAccount(
         }
     });
 
-    const createdCustomer: {id: number} | undefined = await customOldClient.createCustomer(customerData);
-    
-    if (createdCustomer) {
-        await storeCustomerSession(createdCustomer.id);
-    }
+    await createCustomer(customerData);
 
     return {status: 'ok'};
 }
