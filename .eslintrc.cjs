@@ -19,6 +19,7 @@ const config = {
     'no-underscore-dangle': ['error', { allow: ['__typename'] }],
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+    'import/order': 'off',
     '@typescript-eslint/no-restricted-imports': [
       'error',
       {
@@ -36,6 +37,7 @@ const config = {
         '**': 'NEXT_JS_APP_ROUTER_CASE',
       },
     ],
+    'prettier/prettier': 'off',
   },
   ignorePatterns: ['client/generated/**/*.ts',   '**/google_analytics4.js'],
 };
