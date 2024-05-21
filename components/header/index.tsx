@@ -19,7 +19,7 @@ import { StoreLogo, StoreLogoFragment } from '../store-logo';
 
 import { logout } from './_actions/logout';
 import { CartLink } from './cart';
-import { HeaderNav, HeaderNavFragment } from './header-nav';
+import { HeaderNav, HeaderNavFragment, WebpagesFragment } from './header-nav';
 
 export const HeaderFragment = graphql(
   `
@@ -28,9 +28,10 @@ export const HeaderFragment = graphql(
         ...StoreLogoFragment
       }
       ...HeaderNavFragment
+      ...WebpagesFragment
     }
   `,
-  [StoreLogoFragment, HeaderNavFragment],
+  [StoreLogoFragment, HeaderNavFragment, WebpagesFragment],
 );
 
 interface Props {
@@ -55,7 +56,7 @@ export const Header = async ({ cart, data }: Props) => {
           </NavigationMenuLink>
         )}
 
-        <HeaderNav className="hidden xl:flex" data={data.categoryTree} />
+        <HeaderNav className="hidden xl:flex" data={data} />
 
         <div className="flex">
           <NavigationMenuList className="h-full">
@@ -177,7 +178,7 @@ export const Header = async ({ cart, data }: Props) => {
         </div>
 
         <NavigationMenuCollapsed>
-          <HeaderNav data={data.categoryTree} inCollapsedNav />
+          <HeaderNav data={data} inCollapsedNav />
         </NavigationMenuCollapsed>
       </NavigationMenu>
     </header>

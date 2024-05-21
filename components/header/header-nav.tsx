@@ -10,6 +10,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '~/components/ui/navigation-menu';
+import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
+
 import { cn } from '~/lib/utils';
 
 export const HeaderNavFragment = graphql(`
@@ -32,8 +34,40 @@ export const HeaderNavFragment = graphql(`
   }
 `);
 
+export const WebpagesFragment = graphql(`
+  fragment WebpagesFragment on Site {
+    content {
+      pages(filters: { isVisibleInNavigation: true }) {
+        edges {
+          node {
+            __typename
+            name
+            ... on RawHtmlPage {
+              path
+            }
+            ... on ContactPage {
+              path
+            }
+            ... on NormalPage {
+              path
+            }
+            ... on BlogIndexPage {
+              path
+            }
+            ... on ExternalLinkPage {
+              link
+            }
+          }
+        }
+      }
+    }
+  }
+`);
+
+type CombinedHeaderNavData = FragmentOf<typeof HeaderNavFragment> & FragmentOf<typeof WebpagesFragment>;
+
 interface Props {
-  data: FragmentOf<typeof HeaderNavFragment>['categoryTree'];
+  data: CombinedHeaderNavData;
   className?: string;
   inCollapsedNav?: boolean;
 }
@@ -42,8 +76,34 @@ export const HeaderNav = async ({ data, className, inCollapsedNav = false }: Pro
   // To prevent the navigation menu from overflowing, we limit the number of categories to 6.
   // To show a full list of categories, modify the `slice` method to remove the limit.
   // Will require modification of navigation menu styles to accommodate the additional categories.
-  const categoryTree = data.slice(0, 6);
+  const categoryTree = data.categoryTree.slice(0, 6);
+  const webPages = (data.content?.pages) ? removeEdgesAndNodes(data.content.pages) : [];
   const customerId = await getSessionCustomerId();
+
+  const navItems = categoryTree.map((category) => {
+    return {
+      name: category.name, 
+      path: category.path, 
+      children: category.children.map((childCategory1) => {
+        return {
+          name: childCategory1.name,
+          path: childCategory1.path,
+          children: childCategory1.children.map((childCategory2) => {
+            return {
+              name: childCategory2.name,
+              path: childCategory2.path,
+            }
+          }),
+        }
+      }),
+    };
+  }).concat(webPages.slice(0,2).map((webPage) => {
+    return {
+      name: webPage.name,
+      path: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+      children: [],
+    }
+  }));
 
   return (
     <>
@@ -54,15 +114,15 @@ export const HeaderNav = async ({ data, className, inCollapsedNav = false }: Pro
           className,
         )}
       >
-        {categoryTree.map((category) => (
-          <NavigationMenuItem className={cn(inCollapsedNav && 'w-full')} key={category.path}>
-            {category.children.length > 0 ? (
+        {navItems.map((navItem) => (
+          <NavigationMenuItem className={cn(inCollapsedNav && 'w-full')} key={navItem.path}>
+            {navItem.children.length > 0 ? (
               <>
                 <NavigationMenuTrigger className="gap-0 p-0">
                   <>
                     <NavigationMenuLink asChild>
-                      <Link className="grow" href={category.path}>
-                        {category.name}
+                      <Link className="grow" href={navItem.path}>
+                        {navItem.name}
                       </Link>
                     </NavigationMenuLink>
                     <span className={cn(inCollapsedNav && 'p-3')}>
@@ -79,17 +139,17 @@ export const HeaderNav = async ({ data, className, inCollapsedNav = false }: Pro
                     inCollapsedNav && 'ps-3',
                   )}
                 >
-                  {category.children.map((childCategory1) => (
-                    <ul className={cn(inCollapsedNav && 'pb-4')} key={childCategory1.entityId}>
+                  {navItem.children.map((childNavItem1) => (
+                    <ul className={cn(inCollapsedNav && 'pb-4')} key={childNavItem1.path}>
                       <NavigationMenuItem>
-                        <NavigationMenuLink href={childCategory1.path}>
-                          {childCategory1.name}
+                        <NavigationMenuLink href={childNavItem1.path}>
+                          {childNavItem1.name}
                         </NavigationMenuLink>
                       </NavigationMenuItem>
-                      {childCategory1.children.map((childCategory2) => (
-                        <NavigationMenuItem key={childCategory2.entityId}>
-                          <NavigationMenuLink className="font-normal" href={childCategory2.path}>
-                            {childCategory2.name}
+                      {childNavItem1.children.map((childNavItem2) => (
+                        <NavigationMenuItem key={childNavItem2.path}>
+                          <NavigationMenuLink className="font-normal" href={childNavItem2.path}>
+                            {childNavItem2.name}
                           </NavigationMenuLink>
                         </NavigationMenuItem>
                       ))}
@@ -99,7 +159,7 @@ export const HeaderNav = async ({ data, className, inCollapsedNav = false }: Pro
               </>
             ) : (
               <NavigationMenuLink asChild>
-                <Link href={category.path}>{category.name}</Link>
+                <Link href={navItem.path}>{navItem.name}</Link>
               </NavigationMenuLink>
             )}
           </NavigationMenuItem>
