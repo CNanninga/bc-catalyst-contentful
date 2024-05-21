@@ -82,7 +82,11 @@
             "processing": "Traitement en cours…",
             "addToCart": "Ajouter au panier",
             "compare": "Comparer"
-        }
+        },
+        "FAQ": {
+          "heading": "Questions fréquemment posées",
+          "loadMore": "Charger plus"
+        }    
     },
     "Compare": {
         "nothingCompare": "Il n'y a rien à comparer !",
