@@ -7,6 +7,8 @@ import { getSessionCustomerId } from '~/auth';
 import { client } from '~/client';
 import { graphql } from '~/client/graphql';
 
+import { generateLoginToken } from '~/actions/generateLoginToken';
+
 const CheckoutRedirectMutation = graphql(`
   mutation CheckoutRedirectMutation($cartId: String!) {
     cart {
@@ -36,5 +38,14 @@ export const redirectToCheckout = async (formData: FormData) => {
     throw new Error('Invalid checkout url.');
   }
 
-  redirect(url);
+  const relativeCheckoutUrl = url.replace(/^https?:\/\/[^/]*/, '');
+  const token = await generateLoginToken(relativeCheckoutUrl);
+
+  const BIGCOMMERCE_CHECKOUT_DOMAIN = process.env.BIGCOMMERCE_CHECKOUT_DOMAIN ?? '';
+
+  if (token !== null) {
+      redirect(`https://${BIGCOMMERCE_CHECKOUT_DOMAIN}/login/token/${token}`);
+  } else {
+      redirect(url);
+  }
 };
