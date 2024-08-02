@@ -14,6 +14,8 @@ import { Popover } from '../ui/popover';
 import { logout } from './_actions/logout';
 import { CartLink } from './cart';
 
+import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
+
 export const HeaderFragment = graphql(
   `
     fragment HeaderFragment on Site {
@@ -32,6 +34,31 @@ export const HeaderFragment = graphql(
             entityId
             name
             path
+          }
+        }
+      }
+      content {
+        pages(filters: { isVisibleInNavigation: true }) {
+          edges {
+            node {
+              __typename
+              name
+              ... on RawHtmlPage {
+                path
+              }
+              ... on ContactPage {
+                path
+              }
+              ... on NormalPage {
+                path
+              }
+              ... on BlogIndexPage {
+                path
+              }
+              ... on ExternalLinkPage {
+                link
+              }
+            }
           }
         }
       }
@@ -54,9 +81,19 @@ export const Header = async ({ cart, data }: Props) => {
    */
   const categoryTree = data.categoryTree.slice(0, 6);
   const logo = data.settings && <StoreLogo data={data.settings} />;
+  const webPages = (data.content.pages.edges) ? removeEdgesAndNodes(data.content.pages) : [];
+
+  const navItems = categoryTree.concat(webPages.slice(0,2).map(webPage => {
+    return {
+      entityId: 0,
+      name: webPage.name,
+      path: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+      children: [],
+    }
+  }));
 
   return (
-    <ComponentsHeader items={categoryTree} logo={logo}>
+    <ComponentsHeader items={navItems} logo={logo}>
       <QuickSearch>
         <Link className="overflow-hidden text-ellipsis py-3" href="/">
           {logo}
