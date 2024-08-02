@@ -6,12 +6,14 @@ import { getSessionCustomerId } from '~/auth';
 import { client } from '~/client';
 import { graphql } from '~/client/graphql';
 import { revalidate } from '~/client/revalidate-target';
-import { Hero } from '~/components/hero';
 import {
   ProductCardCarousel,
   ProductCardCarouselFragment,
 } from '~/components/product-card-carousel';
 import { LocaleType } from '~/i18n';
+
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
+import CmsContent from '~/components/cms/cms-content';
 
 interface Props {
   params: {
@@ -51,18 +53,23 @@ export default async function Home({ params: { locale } }: Props) {
   const t = await getTranslations({ locale, namespace: 'Home' });
   const messages = await getMessages({ locale });
 
-  const { data } = await client.fetch({
-    document: HomePageQuery,
-    customerId,
-    fetchOptions: customerId ? { cache: 'no-store' } : { next: { revalidate } },
-  });
+  const [ homePageData, cmsContent ] = await Promise.all([
+    client.fetch({
+      document: HomePageQuery,
+      customerId,
+      fetchOptions: customerId ? { cache: 'no-store' } : { next: { revalidate } },
+    }),
+    getCategoryContent('home', 'home'),
+  ]);
+
+  const { data } = homePageData;
 
   const featuredProducts = removeEdgesAndNodes(data.site.featuredProducts);
   const newestProducts = removeEdgesAndNodes(data.site.newestProducts);
 
   return (
     <>
-      <Hero />
+      {cmsContent.length > 0 && <CmsContent blocks={cmsContent} className="mx-8" />}
 
       <div className="my-10">
         <NextIntlClientProvider locale={locale} messages={{ Product: messages.Product ?? {} }}>
