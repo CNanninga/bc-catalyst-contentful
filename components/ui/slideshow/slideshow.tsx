@@ -1,0 +1,132 @@
+import useEmblaCarousel from 'embla-carousel-react';
+import { ArrowLeft, ArrowRight, Pause, Play } from 'lucide-react';
+import { ComponentPropsWithRef, ReactNode, useEffect, useReducer, useState } from 'react';
+
+interface Props extends ComponentPropsWithRef<'section'> {
+  slides: ReactNode[];
+  interval?: number;
+}
+
+const Slideshow = ({ children, className, interval = 15_000, slides, style, ...props }: Props) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+
+  const [isHoverPaused, setIsHoverPaused] = useState(false);
+  const [isPaused, togglePaused] = useReducer((val: boolean) => !val, false);
+
+  const [activeSlide, setActiveSlide] = useState(1);
+
+  const [visibilityState, setVisibilityState] = useState<
+    DocumentVisibilityState | Omit<string, 'hidden' | 'visible'>
+  >('');
+
+  useEffect(() => {
+    const autoplay = setInterval(() => {
+      if (isPaused) return;
+      if (isHoverPaused) return;
+      if (!emblaApi) return;
+      if (visibilityState === 'hidden') return;
+
+      emblaApi.scrollNext();
+    }, interval);
+
+    return () => clearInterval(autoplay);
+  }, [emblaApi, isHoverPaused, interval, isPaused, visibilityState]);
+
+  useEffect(() => {
+    window.addEventListener('visibilitychange', () => {
+      setVisibilityState(document.visibilityState);
+    });
+
+    return () => window.removeEventListener('visibilitychange', () => null);
+  }, [visibilityState]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    // We must reinitialize Embla on client-side navigation
+    // E.g., navigating from Homepage to PDP to Homepage
+    emblaApi.reInit();
+
+    const initialize = () => {
+      setActiveSlide(emblaApi.selectedScrollSnap() + 1);
+    };
+
+    const onSelect = () => {
+      setActiveSlide(emblaApi.selectedScrollSnap() + 1);
+    };
+
+    emblaApi.on('slidesInView', initialize);
+    emblaApi.on('reInit', initialize);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, setActiveSlide]);
+
+  const scrollPrev = () => {
+    if (emblaApi) emblaApi.scrollPrev();
+  };
+
+  const scrollNext = () => {
+    if (emblaApi) emblaApi.scrollNext();
+  };
+
+  return (
+    <section
+      aria-label="Interactive slide show"
+      aria-roledescription="carousel"
+      className="relative -mx-6 overflow-hidden sm:-mx-10 md:-mx-12 lg:mx-0"
+      onBlur={() => setIsHoverPaused(false)}
+      onFocus={() => setIsHoverPaused(true)}
+      onMouseEnter={() => setIsHoverPaused(true)}
+      onMouseLeave={() => setIsHoverPaused(false)}
+      {...props}
+    >
+      <div ref={emblaRef}>
+        <ul className="flex" id="slideshow-slides">
+          {slides.map((slide, index) => (
+            <li
+              aria-label={`${index + 1} of ${slides.length}`}
+              aria-roledescription="slide"
+              className="min-w-0 shrink-0 grow-0 basis-full"
+              // @ts-expect-error https://github.com/DefinitelyTyped/DefinitelyTyped/pull/60822
+              inert={index === activeSlide - 1 ? null : 'true'}
+              key={index}
+            >
+              {slide}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="absolute bottom-12 start-12 flex items-center gap-4">
+        <button
+          aria-label={isPaused ? 'Play slideshow' : 'Pause slideshow'}
+          className="inline-flex h-12 w-12 items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+          onClick={() => {
+            togglePaused();
+          }}
+        >
+          {isPaused ? <Play /> : <Pause />}
+        </button>
+        <button
+          aria-controls="slideshow-slides"
+          aria-label="Previous slide"
+          className="inline-flex h-12 w-12 items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+          onClick={scrollPrev}
+        >
+          <ArrowLeft />
+        </button>
+        <span aria-atomic="false" aria-live={isPaused ? 'polite' : 'off'} className="font-semibold">
+          {activeSlide} of {slides.length}
+        </span>
+        <button
+          aria-controls="slideshow-slides"
+          aria-label="Next slide"
+          className="inline-flex h-12 w-12 items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/20"
+          onClick={scrollNext}
+        >
+          <ArrowRight />
+        </button>
+      </div>
+    </section>
+  );
+};
+
+export { Slideshow };
