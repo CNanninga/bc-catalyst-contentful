@@ -9,5 +9,3 @@ import { permanentRedirect } from '~/i18n/routing';
  */
 
 export const GET = () => permanentRedirect('/sitemap.xml');
-
-export const runtime = 'edge';

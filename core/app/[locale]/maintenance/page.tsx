@@ -88,5 +88,3 @@ export default async function Maintenance({ params: { locale } }: Props) {
     </Container>
   );
 }
-
-export const runtime = 'edge';
