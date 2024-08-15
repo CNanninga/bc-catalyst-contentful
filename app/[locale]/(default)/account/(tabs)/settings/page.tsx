@@ -30,5 +30,3 @@ export default async function Settings({ searchParams }: Props) {
     </>
   );
 }
-
-export const runtime = 'edge';

@@ -9,5 +9,3 @@ import { permanentRedirect } from 'next/navigation';
  */
 
 export const GET = () => permanentRedirect('/sitemap.xml');
-
-export const runtime = 'edge';

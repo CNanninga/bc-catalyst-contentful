@@ -55,5 +55,3 @@ export default async function Register() {
     </div>
   );
 }
-
-export const runtime = 'edge';

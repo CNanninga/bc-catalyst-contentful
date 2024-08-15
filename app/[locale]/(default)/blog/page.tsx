@@ -50,5 +50,3 @@ export default async function Blog({ searchParams }: Props) {
     </div>
   );
 }
-
-export const runtime = 'edge';

@@ -41,5 +41,3 @@ export default async function AddressesPage({ searchParams }: Props) {
     </>
   );
 }
-
-export const runtime = 'edge';
