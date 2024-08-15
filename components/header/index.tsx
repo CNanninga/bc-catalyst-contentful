@@ -17,6 +17,8 @@ import { CartLink } from './cart';
 import { HeaderFragment } from './fragment';
 import { QuickSearch } from './quick-search';
 
+import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
+
 interface Props {
   cart: ReactNode;
   data: FragmentOf<typeof HeaderFragment>;
@@ -34,7 +36,7 @@ export const Header = async ({ cart, data }: Props) => {
    */
   const categoryTree = data.categoryTree.slice(0, 6);
 
-  const links = categoryTree.map(({ name, path, children }) => ({
+  const categoryLinks = categoryTree.map(({ name, path, children }) => ({
     label: name,
     href: path,
     groups: children.map((firstChild) => ({
@@ -45,6 +47,15 @@ export const Header = async ({ cart, data }: Props) => {
         href: secondChild.path,
       })),
     })),
+  }));
+
+  const webPages = (data.content.pages.edges) ? removeEdgesAndNodes(data.content.pages) : [];
+
+  const links = categoryLinks.concat(webPages.slice(0,2).map(webPage => {
+    return {
+      label: webPage.name,
+      href: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+    }
   }));
 
   return (
