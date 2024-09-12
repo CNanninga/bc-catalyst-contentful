@@ -1,0 +1,520 @@
+{
+    "Home": {
+        "Carousel": {
+            "featuredProducts": "Udvalgte produkter",
+            "newestProducts": "Nyeste produkter"
+        }
+    },
+    "FacetedGroup": {
+        "MobileSideNav": {
+            "filters": "Filtre",
+            "showFilters": "Vis filtre",
+            "subCategories": "Kategorier"
+        },
+        "FacetedSearch": {
+            "filters": "Filtre",
+            "RefineBy": {
+                "refineBy": "Indsnævr efter",
+                "clearAllRefinements": "Ryd alle"
+            },
+            "Facets": {
+                "updatePriceButton": "Opdater prisen",
+                "freeShippingLabel": "Gratis fragt",
+                "isFeaturedLabel": "Er udvalgt",
+                "inStockLabel": "På lager",
+                "rating": "{currentRating, plural, =1 {1 stjerne} other {# stjerner}} og opefter",
+                "priceFilter": {
+                    "minPricePlaceholder": "{currencySign} min.",
+                    "minPriceAriaLabel": "Minimumpriser",
+                    "maxPricePlaceholder": "{currencySign} maks.",
+                    "maxPriceAriaLabel": "Maksimmumpriser"
+                }
+            }
+        },
+        "SortBy": {
+            "ariaLabel": "Sortér efter:",
+            "featuredItems": "Udvalgte varer",
+            "bestSellingItems": "Bedst sælgende varer",
+            "newestItems": "Nyeste varer",
+            "aToZ": "A til Å",
+            "zToA": "Å til A",
+            "byReview": "Efter anmeldelse",
+            "priceAscending": "Pris: Stigende",
+            "priceDescending": "Pris: Faldende",
+            "relevance": "Relevans"
+        }
+    },
+    "Brand": {
+        "sortBy": "{items, plural, =0 {no items} =1 {1 vare} other {# varer}}",
+        "products": "produkter"
+    },
+    "Category": {
+        "sortBy": "{items, plural, =0 {no items} =1 {1 vare} other {# varer}}",
+        "products": "produkter",
+        "items": "Varer"
+    },
+    "Search": {
+        "heading": "Søg",
+        "products": "produkter",
+        "sortBy": "{items, plural, =0 {no items} =1 {1 vare} other {# varer}}",
+        "searchResults": "Søgeresultater for"
+    },
+    "Account": {
+        "Home": {
+            "heading": "Min konto",
+            "accountTabsLabel": "Konto-faner",
+            "orders": "Ordrer",
+            "messages": "Meddelelser",
+            "addresses": "Adresser",
+            "wishlists": "Ønskelister",
+            "recentlyViewed": "Set for nylig",
+            "settings": "Kontoindstillinger",
+            "changePassword": "Skift adgangskode"
+        },
+        "Addresses": {
+            "defaultAddress": "Standard",
+            "alternativeAddress": "Alternativ",
+            "newAddress": "Ny adresse",
+            "addNewAddress": "Tilføj ny adresse",
+            "addNewAddressSuccessMessage": "Adressen er tilføjet til din konto.",
+            "editAddress": "Rediger adresse",
+            "editButton": "Rediger",
+            "deleteButton": "Slet",
+            "deleteAddress": "Adressen er slettet fra din konto.",
+            "confirmDeleteAddress": "Slet adresse",
+            "deleteModalTitle": "Er du sikker på, at du vil slette adressen?",
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "emptyTextValidationMessage": "Dette felt må ikke være tomt",
+            "successMessage": "Adressen er blevet oprettet.",
+            "submit": "Tilføj ny adresse",
+            "cancel": "Annuller",
+            "submitting": "I gang ..."
+        },
+        "AddAddress": {
+            "success": "The address has been added.",
+            "Errors": {
+                "inputError": "Something went wrong with proccessing user input.",
+                "error": "Unknown error."
+            }
+        },
+        "DeleteAddress": {
+            "success": "Adressen er slettet fra din konto.",
+            "error": "Unknown error."
+        },
+        "UpdateAddress": {
+            "success": "The address has been updated.",
+            "Errors": {
+                "inputError": "Something went wrong with proccessing user input.",
+                "notFound": "Address does not exist.",
+                "error": "Unknown error."
+            }
+        },
+        "EditAddress": {
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "emptyTextValidationMessage": "Dette felt må ikke være tomt",
+            "successMessage": "Adressen er blevet opdateret.",
+            "cancel": "Annuller",
+            "deleteButton": "Slet",
+            "deleteAddress": "Adressen er slettet fra din konto.",
+            "confirmDeleteAddress": "Slet adresse",
+            "deleteModalTitle": "Er du sikker på, at du vil slette denne adresse?",
+            "submit": "Opdatér adresse",
+            "submitting": "I gang ..."
+        },
+        "Settings": {
+            "emptyTextValidatoinMessage": "Dette felt må ikke være tomt",
+            "cancel": "Annuller",
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "changePassword": "Nulstil adgangskoden",
+            "submit": "Opdater indstillinger",
+            "submitting": "Opdater indstillinger ...",
+            "successMessage": "Kære {firstName} {lastName}, du har opdateret dine kontodata",
+            "validationMessages": {
+                "email": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                "empty": "Dette felt må ikke være tomt",
+                "firstName": "Indtast dit fornavn",
+                "lastName": "Indtast dit efternavn",
+                "city": "Indtast en by",
+                "company": "Indtast et firmanavn",
+                "phone": "Indtast et telefonnummer"
+            },
+            "ChangePassword": {
+                "success": "Password has been updated successfully.",
+                "error": "Unknown error."
+            },
+            "UpdateCustomer": {
+                "Errors": {
+                    "inputError": "Something went wrong with proccessing user input.",
+                    "notFound": "Customer does not exist"
+                }
+            }
+        },
+        "Login": {
+            "heading": "Log på",
+            "resetPasswordHeading": "Nulstil adgangskoden",
+            "changePasswordHeading": "Skift adgangskode",
+            "Form": {
+                "errorMessage": "Din e-mailadresse eller adgangskode er forkert. Prøv at logge ind igen, eller nulstil din adgangskode",
+                "emailLabel": "E-mail",
+                "enterEmailMessage": "Indtast din e-mailadresse",
+                "passwordLabel": "Adgangskode",
+                "entePasswordMessage": "Indtast din adgangskode.",
+                "submitting": "Indsender ...",
+                "logIn": "Log ind",
+                "resetPassword": "Har du glemt din adgangskode?",
+                "validationMessages": {
+                    "email": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                    "firstName": "Indtast dit fornavn",
+                    "lastName": "Indtast dit efternavn",
+                    "city": "Indtast en by",
+                    "company": "Indtast et firmanavn",
+                    "phone": "Indtast et telefonnummer"
+                }
+            },
+            "CreateAccount": {
+                "heading": "Ny kunde?",
+                "accountBenefits": "Opret en konto hos os, og du vil kunne:",
+                "fastCheckout": "Betale hurtigere",
+                "multipleAddresses": "Gemme flere forsendelsesadresser",
+                "ordersHistory": "Få adgang til din ordrehistorik",
+                "ordersTracking": "Spore nye ordrer",
+                "wishlists": "Gemme varer til din ønskeliste",
+                "createLink": "Opret konto "
+            }
+        },
+        "Register": {
+            "heading": "Ny konto",
+            "submit": "Opret konto",
+            "submitting": "Opretter konto ...",
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "stateProvincePrefix": "Vælg landsdel eller kommune",
+            "validationMessages": {
+                "email": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                "empty": "Dette felt må ikke være tomt",
+                "numbersOverflow": "Entered value exceeds max range of {max}",
+                "numbersUnderflow": "Entered value falls short of min range of {min}",
+                "numbersOnly": "Enter numbers only",
+                "firstName": "Indtast dit fornavn",
+                "lastName": "Indtast dit efternavn",
+                "password": "Indtast en adgangskode",
+                "confirmPassword": "Adgangskoderne stemmer ikke overens",
+                "address1": "Indtast en adresse",
+                "address2": "Indtast en adresse",
+                "city": "Indtast en by",
+                "company": "Indtast et firmanavn",
+                "phone": "Indtast et telefonnummer",
+                "postalCode": "Indtast et postnummer"
+            }
+        },
+        "ChangePassword": {
+            "currentPasswordLabel": "Nuværende adgangskode",
+            "newPasswordLabel": "Den nye adgangskode",
+            "confirmPasswordLabel": "Bekræft adgangskode",
+            "cancel": "Annuller",
+            "confirmPasswordValidationMessage": "De indtastede adgangskoder stemmer ikke overens. Prøv igen.",
+            "newPasswordValidationMessage": "Den nye adgangskode skal være forskellig fra den nuværende og/eller svare til bekræftelsesadgangskoden.",
+            "notEmptyMessage": "Feltet må ikke være tomt",
+            "successMessage": "Adgangskoden er blevet opdateret.",
+            "confirmChangePassword": "Din adgangskode er blevet opdateret. Log ind med dine nye legitimationsoplysninger."
+        },
+        "SubmitChangePassword": {
+            "spinnerText": "Indsender ...",
+            "submitText": "Skift adgangskode"
+        },
+        "ResetPassword": {
+            "description": "Indtast den e-mail, der er knyttet til din konto, nedenfor. Vi sender dig instruktioner til nulstilling af din adgangskode.",
+            "emailLabel": "E-mail",
+            "emailValidationMessage": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+            "successMessage": "Din e-mail til nulstilling af adgangskoden er på vej til {email}. Hvis du ikke kan finde den, skal du tjekke spam-mappen.",
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "confirmResetPassword": "Hvis e-mailadressen {email} er knyttet til en konto i vores butik, har vi sendt dig en e-mail til nulstilling af adgangskode. Tjek din indbakke og spam-mappe, hvis du ikke kan se den."
+        },
+        "SubmitResetPassword": {
+            "spinnerText": "Indsender ...",
+            "submitText": "Nulstil adgangskoden"
+        }
+    },
+    "Blog": {
+        "SharingLinks": {
+            "share": "Del",
+            "email": "E-mail",
+            "print": "Udskriv"
+        }
+    },
+    "Cart": {
+        "heading": "Din indkøbskurv",
+        "empty": "din indkøbskurv er tom",
+        "emptyDetails": "Det ser ud til, at du ikke har tilføjet noget til din indkøbskurv. Gå videre, og udforsk vores mest populære kategorier",
+        "proceedToCheckout": "Gå til kassen",
+        "loading": "Indlæser ...",
+        "spinnerText": "Opdaterer...",
+        "CheckoutSummary": {
+            "subTotal": "Subtotal",
+            "discounts": "Rabatter",
+            "coupon": "Kupon",
+            "couponCode": "Kuponkode",
+            "addCoupon": "Tilføj kupon",
+            "enterCouponCode": "Indtast din kuponkode",
+            "couponCodeRequired": "Indtast en kuponkode.",
+            "couponCodeInvalid": "Den kuponkode, du indtastede, er ikke gyldig.",
+            "remove": "Fjern",
+            "spinnerText": "Fjerner ...",
+            "couponCodeRemoveFailed": "Der opstod en fejl under fjernelse af kuponkoden. Prøv igen.",
+            "tax": "Moms",
+            "grandTotal": "Samlet beløb",
+            "shipping": "Forsendelse",
+            "shippingCost": "Forsendelsesomkostninger",
+            "handlingCost": "Håndteringsomkostninger",
+            "add": "Tilføj",
+            "change": "Ændr",
+            "cancel": "Annuller",
+            "errorMessage": "Oversigt over indkøbskurven blev ikke fundet. Prøv igen."
+        },
+        "ShippingInfo": {
+            "country": "Land",
+            "countryPlaceholder": "Vælg land",
+            "state": "Landsdel/kommune",
+            "statePlaceholder": "Vælg stat",
+            "city": "By",
+            "cityPlaceholder": "By",
+            "postcode": "Postnummer",
+            "postcodePlaceholder": "Postnummer",
+            "errorMessage": "Noget gik galt. Prøv igen."
+        },
+        "SubmitShippingInfo": {
+            "spinnerText": "Indsender ...",
+            "submitText": "Anslå forsendelse"
+        },
+        "ShippingCost": {
+            "shippingOptions": "Tilgængelige indstillinger",
+            "radioGroupAriaLabel": "Tilgængelige forsendelsesmuligheder",
+            "noAvailableOptions": "Der er ingen tilgængelige muligheder for forsendelse. Tjek de angivne oplysninger, og prøv igen.",
+            "errorMessage": "Noget gik galt. Prøv igen."
+        },
+        "SubmitShippingCost": {
+            "spinnerText": "Indsender ...",
+            "submitText": "Opdater forsendelsesomkostningerne"
+        },
+        "SubmitCouponCode": {
+            "spinnerText": "Indsender ...",
+            "submitText": "Anvend"
+        },
+        "SubmitItemQuantity": {
+            "spinnerText": "Opdaterer...",
+            "submitReduceText": "Reducer antallet",
+            "submitIncreaseText": "Forøg antal",
+            "errorMessage": "Der opstod en fejl under opdatering af vareantallet. Prøv igen."
+        },
+        "SubmitRemoveItem": {
+            "remove": "Fjern",
+            "spinnerText": "Fjerner ...",
+            "errorMessage": "Der opstod en fejl under fjernelse af varen. Prøv igen."
+        }
+    },
+    "Compare": {
+        "heading": "Sammenligning af {quantity, plural, =1 {1 Produkt} other {# Produkter}}",
+        "nothingToCompare": "Der er ikke noget at sammenligne.",
+        "helpingText": "På en eller anden måde er det lykkedes dig at lande her, men du skal først vælge et par produkter.",
+        "Table": {
+            "caption": "Product comparison",
+            "noImage": "No image",
+            "viewOptions": "Se muligheder",
+            "description": "Beskrivelse",
+            "rating": "Bedømmelse",
+            "availability": "Tilgængelighed",
+            "Prices": {
+                "msrp": "Producents anbefalede detailpris",
+                "was": "var",
+                "now": "Nu"
+            }
+        },
+        "AddToCart": {
+            "success": "<cartLink>{CartItems, plural, =1 {1 varer} other {# varer}} tilføjet til din indkøbskurv</cartLink>",
+            "error": "Fejl ved tilføjelse af produkt til indkøbskurv. Prøv igen."
+        }
+    },
+    "Login": {
+        "heading": "Log på",
+        "resetPasswordHeading": "Nulstil adgangskoden",
+        "changePasswordHeading": "Skift adgangskode",
+        "Form": {
+            "errorMessage": "Din e-mailadresse eller adgangskode er forkert. Prøv at logge ind igen, eller nulstil din adgangskode",
+            "emailLabel": "E-mail",
+            "enterEmailMessage": "Indtast din e-mailadresse",
+            "passwordLabel": "Adgangskode",
+            "entePasswordMessage": "Indtast din adgangskode.",
+            "submitting": "Indsender ...",
+            "logIn": "Log ind",
+            "resetPassword": "Har du glemt din adgangskode?",
+            "validationMessages": {
+                "email": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                "firstName": "Indtast dit fornavn",
+                "lastName": "Indtast dit efternavn",
+                "city": "Indtast en by",
+                "company": "Indtast et firmanavn",
+                "phone": "Indtast et telefonnummer"
+            }
+        },
+        "CreateAccount": {
+            "heading": "Ny kunde?",
+            "accountBenefits": "Opret en konto hos os, og du vil kunne:",
+            "fastCheckout": "Betale hurtigere",
+            "multipleAddresses": "Gemme flere forsendelsesadresser",
+            "ordersHistory": "Få adgang til din ordrehistorik",
+            "ordersTracking": "Spore nye ordrer",
+            "wishlists": "Gemme varer til din ønskeliste",
+            "createLink": "Opret konto "
+        },
+        "Register": {
+            "heading": "Ny konto",
+            "submit": "Opret konto",
+            "submitting": "Opretter konto ...",
+            "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+            "stateProvincePrefix": "Vælg landsdel eller kommune",
+            "validationMessages": {
+                "email": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                "empty": "Dette felt må ikke være tomt",
+                "firstName": "Indtast dit fornavn",
+                "lastName": "Indtast dit efternavn",
+                "password": "Indtast en adgangskode",
+                "confirmPassword": "Adgangskoderne stemmer ikke overens",
+                "address1": "Indtast en adresse",
+                "address2": "Indtast en adresse",
+                "city": "Indtast en by",
+                "company": "Indtast et firmanavn",
+                "phone": "Indtast et telefonnummer",
+                "postalCode": "Indtast et postnummer"
+            },
+            "Errors": {
+                "inputError": "Something went wrong with proccessing user input.",
+                "apiError": "Looks like we are experience a server error, please try again in a few minutes.",
+                "error": "Noget gik galt. Prøv igen senere."
+            }
+        }
+    },
+    "Product": {
+        "loading": "Indlæser ...",
+        "Carousel": {
+            "relatedProducts": "Relaterede produkter"
+        },
+        "Form": {
+            "success": "<cartLink>{CartItems, plural, =1 {1 varer} other {# varer}} tilføjet til din indkøbskurv</cartLink>",
+            "error": "Fejl ved tilføjelse af produkt til indkøbskurv. Prøv igen.",
+            "saveToWishlist": "Gem i ønskeliste",
+            "quantityLabel": "Antal"
+        },
+        "Description": {
+            "heading": "Beskrivelse"
+        },
+        "Warranty": {
+            "heading": "Garanti"
+        },
+        "Reviews": {
+            "heading": "Anmeldelser",
+            "reviewsCount": "Tæller:",
+            "unreviewed": "Dette produkt er ikke blevet anmeldt endnu.",
+            "reviewRating": "Bedømmelse: {rating} ud af 5 stjerner",
+            "reviewAuthor": "Indsendt af {author} den"
+        },
+        "Details": {
+            "additionalDetails": "Yderligere oplysninger",
+            "sku": "SKU",
+            "upc": "UPC",
+            "minPurchase": "Minimumskøb",
+            "maxPurchase": "Maxiumumkøb",
+            "availability": "Tilgængelighed",
+            "condition": "Tilstand",
+            "weight": "Vægt",
+            "Prices": {
+                "msrp": "Producents anbefalede detailpris",
+                "was": "var",
+                "now": "Nu"
+            },
+            "ReviewSummary": {
+                "rating": "Bedømmelse:",
+                "ratingRange": "ud af 5 stjerner.",
+                "reviewsNumber": "Antal anmeldelser:"
+            }
+        }
+    },
+    "WebPages": {
+        "ContactUs": {
+            "Form": {
+                "success": "Tak for din henvendelse. Vi vender snart tilbage til dig.",
+                "error": "Unknown error.",
+                "fullNameLabel": "Fulde navn",
+                "companyNameLabel": "Firmanavn",
+                "phoneLabel": "Telefon",
+                "orderNoLabel": "Ordrenummer",
+                "rmaLabel": "RMA-nummer",
+                "emailLabel": "E-mail",
+                "emailValidationMessage": "Indtast en gyldig e-mail, f.eks. navn@domæne.com",
+                "commentsLabel": "Kommentarer/spørgsmål",
+                "commentsValidationMessage": "Angiv gyldige kommentarer",
+                "recaptchaText": "Bestå ReCAPTCHA-kontrol",
+                "onSubmitText": "Indsender ...",
+                "submitFormText": "Indsend formular"
+            }
+        }
+    },
+    "Maintenance": {
+        "message": "We are down for maintenance",
+        "contactUs": "You can contact us at:"
+    },
+    "StoreSelector": {
+        "heading": "Vælg et sprog og en region"
+    },
+    "Error": {
+        "heading": "Der opstod en serverfejl.",
+        "message": "Prøv igen senere."
+    },
+    "NotFound": {
+        "heading": "Vi kunne ikke finde den side.",
+        "message": "Det ser ud til, at den side, du anmodede om, er flyttet eller ikke længere eksisterer. ",
+        "Carousel": {
+            "featuredProducts": "Udvalgte produkter"
+        }
+    },
+    "Components": {
+        "Header": {
+            "Account": {
+                "account": "Konto",
+                "myAccount": "My account",
+                "addresses": "Adresser",
+                "accountSettings": "Kontoindstillinger",
+                "login": "Log på",
+                "logout": "Log ud"
+            },
+            "LocaleSwitcher": {
+                "chooseCountryAndLanguage": "Vælg land og sprog",
+                "goToSite": "Gå til webstedet"
+            }
+        },
+        "Compare": {
+            "compareButton": "Sammenlign ({products})",
+            "productPhoto": "Foto",
+            "removeProductAriaLabel": "Fjern {product} fra sammenligningslisten"
+        },
+        "SearchForm": {
+            "searchProducts": "Søg efter produkter",
+            "searchPlaceholder": "Søg ...",
+            "search": "Søg",
+            "noSearchResults": "Beklager, ingen resultater for {term}.",
+            "checkSpelling": "Kontrollér stavningen, eller prøv en anden søgning."
+        },
+        "AddToCartButton": {
+            "addToCart": "Føj til kurv",
+            "outOfStock": "Udsolgt",
+            "preorder": "Forudbestil",
+            "unavailable": "Ikke tilgængelig",
+            "processing": "Behandler..."
+        },
+        "ProductCard": {
+            "AddToCart": {
+                "viewOptions": "Se muligheder",
+                "success": "<cartLink>{CartItems, plural, =1 {1 varer} other {# varer}} tilføjet til din indkøbskurv</cartLink>",
+                "error": "Fejl ved tilføjelse af produkt til indkøbskurv. Prøv igen."
+            }
+        }
+    }
+}
