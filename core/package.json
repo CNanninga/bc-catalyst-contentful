@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@bigcommerce/catalyst-client": "workspace:^",
+    "@contentful/rich-text-react-renderer": "^15.22.11",
+    "@contentful/rich-text-types": "^16.8.5",
     "@icons-pack/react-simple-icons": "^10.1.0",
     "@makeswift/runtime": "^0.21.3",
     "@radix-ui/react-accordion": "^1.2.1",
@@ -54,12 +56,12 @@
     "react-hot-toast": "^2.4.1",
     "schema-dts": "^1.1.2",
     "server-only": "^0.0.1",
+    "set-cookie-parser": "^2.6.0",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-radix": "^3.0.5",
     "uuid": "^11.0.3",
     "webpack": "^5.96.1",
-    "set-cookie-parser": "^2.6.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -76,9 +78,9 @@
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@types/react-google-recaptcha": "^2.1.9",
+    "@types/set-cookie-parser": "^2.4.10",
     "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.20",
-    "@types/set-cookie-parser": "^2.4.10",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.57.1",

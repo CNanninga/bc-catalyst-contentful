@@ -15,6 +15,9 @@ import { Reviews } from './_components/reviews';
 import { Warranty } from './_components/warranty';
 import { getProduct } from './page-data';
 
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
+import CmsContent from '~/components/cms/cms-content';
+
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -95,6 +98,8 @@ export default async function Product(props: Props) {
 
   const category = removeEdgesAndNodes(product.categories).at(0);
 
+  const cmsContent = await getCategoryContent('product', product.sku);
+
   return (
     <>
       {category && <Breadcrumbs category={category} />}
@@ -102,6 +107,7 @@ export default async function Product(props: Props) {
       <div className="mb-12 mt-4 lg:grid lg:grid-cols-2 lg:gap-8">
         <Gallery product={product} />
         <Details product={product} />
+        {cmsContent.length > 0 && <CmsContent blocks={cmsContent} className="lg:col-span-2 mx-8" />}
         <div className="lg:col-span-2">
           <Description product={product} />
           <Warranty product={product} />
