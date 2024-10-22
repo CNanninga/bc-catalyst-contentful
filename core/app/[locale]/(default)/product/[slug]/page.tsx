@@ -8,6 +8,7 @@ import { Breadcrumbs } from '~/components/breadcrumbs';
 
 import { Description } from './_components/description';
 import { Details } from './_components/details';
+import Faqs from '~/components/product-faqs';
 import { Gallery } from './_components/gallery';
 import { ProductViewed } from './_components/product-viewed';
 import { RelatedProducts } from './_components/related-products';
@@ -111,6 +112,14 @@ export default async function Product(props: Props) {
         <div className="lg:col-span-2">
           <Description product={product} />
           <Warranty product={product} />
+
+          <h2 className="my-4 text-xl font-bold md:text-2xl">{t('FAQ.heading')}</h2>
+          <div className="mx-auto md:w-2/3">
+            <Suspense fallback={t('loading')}>
+              <Faqs productId={product.entityId} />
+            </Suspense>
+          </div>
+
           <Suspense fallback={t('loading')}>
             <Reviews productId={product.entityId} />
           </Suspense>
