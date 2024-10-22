@@ -381,6 +381,10 @@
         "ratingRange": "out of 5 stars.",
         "reviewsNumber": "Number of reviews:"
       }
+    },
+    "FAQ": {
+      "heading": "Frequently Asked Questions",
+      "loadMore": "Load more"
     }
   },
   "WebPages": {
