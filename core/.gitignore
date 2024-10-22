@@ -40,6 +40,8 @@ next-env.d.ts
 
 # generated
 client/generated
+*.graphql
+*-graphql.d.ts
 
 # secrets
 .catalyst
