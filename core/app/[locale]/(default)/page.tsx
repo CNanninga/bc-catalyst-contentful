@@ -10,6 +10,9 @@ import { ProductCardCarouselFragment } from '~/components/product-card-carousel/
 import { Slideshow } from '~/components/slideshow';
 import { LocaleType } from '~/i18n/routing';
 
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
+import CmsContent from '~/components/cms/cms-content';
+
 const HomePageQuery = graphql(
   `
     query HomePageQuery {
@@ -46,17 +49,25 @@ export default async function Home({ params: { locale } }: Props) {
   const t = await getTranslations('Home');
   const customerAccessToken = await getSessionCustomerAccessToken();
 
-  const { data } = await client.fetch({
-    document: HomePageQuery,
-    customerAccessToken,
-    fetchOptions: customerAccessToken ? { cache: 'no-store' } : { next: { revalidate } },
-  });
+  const [ homePageData, cmsContent ] = await Promise.all([
+    client.fetch({
+      document: HomePageQuery,
+      customerAccessToken,
+      fetchOptions: customerAccessToken ? { cache: 'no-store' } : { next: { revalidate } },
+    }),
+    getCategoryContent('home', 'home'),
+  ]);
+
+  const { data } = homePageData;
 
   const featuredProducts = removeEdgesAndNodes(data.site.featuredProducts);
   const newestProducts = removeEdgesAndNodes(data.site.newestProducts);
 
   return (
     <>
+
+      {cmsContent.length > 0 && <CmsContent blocks={cmsContent} className="mx-8" />}
+
       <Slideshow />
 
       <div className="my-10">

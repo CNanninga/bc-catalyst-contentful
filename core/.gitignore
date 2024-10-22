@@ -40,6 +40,7 @@ next-env.d.ts
 
 # generated
 client/generated
+contentful-client/generated
 *.graphql
 *-graphql.d.ts
 

@@ -17,6 +17,9 @@ import { EmptyState } from './_components/empty-state';
 import { SubCategories } from './_components/sub-categories';
 import { getCategoryPageData } from './page-data';
 
+import { getCategoryContent } from '~/contentful-client/queries/get-category-content';
+import CmsContent from '~/components/cms/cms-content';
+
 interface Props {
   params: {
     slug: string;
@@ -67,6 +70,9 @@ export default async function Category({ params: { locale, slug }, searchParams 
   const products = productsCollection.items;
   const { hasNextPage, hasPreviousPage, endCursor, startCursor } = productsCollection.pageInfo;
 
+  const catPath = category.path.replace(/(\/$)/, '').replace(/^\//, '');
+  const cmsContent = await getCategoryContent('category', catPath);
+
   return (
     <div className="group">
       <Breadcrumbs category={category} />
@@ -91,6 +97,8 @@ export default async function Category({ params: { locale, slug }, searchParams 
           </div>
         </div>
       </div>
+
+      {cmsContent.length > 0 && <CmsContent blocks={cmsContent} />}
 
       <div className="grid grid-cols-4 gap-8">
         <FacetedSearch
