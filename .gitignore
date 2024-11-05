@@ -1,0 +1,16 @@
+node_modules
+dist
+.turbo
+.vscode/**/*
+!.vscode/settings.example.json
+.idea
+.vercel
+.catalyst
+.env
+.env*.local
+test-results/
+playwright-report/
+playwright/.cache/
+bigcommerce.graphql
+bigcommerce-graphql.d.ts
+.DS_Store
