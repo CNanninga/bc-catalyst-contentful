@@ -4,10 +4,6 @@ See main README-Catalyst.md.
 
 ## Custom Features
 
-### Missing BigCommerce Features
-
-* **Maintain Customer Session on Checkout** - Customer Login API used to log into BC storefront with current customer's ID before redirecting for checkout.
-
 ### Contentful Integration
 
 Banner content loaded from Contentful for:
@@ -52,9 +48,5 @@ Changes to main nav:
 
 Additional environment vars:
 
-* `BIGCOMMERCE_CHECKOUT_CHANNEL_ID` - For redirected checkout
-* `BIGCOMMERCE_CHECKOUT_DOMAIN` - For redirected checkout
-* `BIGCOMMERCE_CLIENT_ID` - from v2/v3 API account with customer login permission
-* `BIGCOMMERCE_CLIENT_SECRET` - from v2/v3 API account with customer login permission
 * `CONTENTFUL_SPACE_ID`
 * `CONTENTFUL_ACCESS_TOKEN`
