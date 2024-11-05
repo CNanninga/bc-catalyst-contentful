@@ -113,9 +113,6 @@ importers:
       graphql:
         specifier: ^16.9.0
         version: 16.9.0
-      jose:
-        specifier: ^5.2.3
-        version: 5.4.0
       lodash.debounce:
         specifier: ^4.0.8
         version: 4.0.8
