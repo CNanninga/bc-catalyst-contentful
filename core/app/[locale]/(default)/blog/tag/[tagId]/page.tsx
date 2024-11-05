@@ -38,3 +38,5 @@ export default async function Tag({ params: { tagId }, searchParams }: Props) {
     </div>
   );
 }
+
+export const runtime = 'edge';

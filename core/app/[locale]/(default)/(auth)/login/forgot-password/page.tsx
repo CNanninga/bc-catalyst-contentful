@@ -46,3 +46,5 @@ export default async function Reset() {
     </div>
   );
 }
+
+export const runtime = 'edge';

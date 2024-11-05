@@ -103,3 +103,5 @@ export default async function AddPage() {
     </div>
   );
 }
+
+export const runtime = 'edge';

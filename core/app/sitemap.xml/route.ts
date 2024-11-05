@@ -16,3 +16,5 @@ export const GET = async () => {
     },
   });
 };
+
+export const runtime = 'edge';

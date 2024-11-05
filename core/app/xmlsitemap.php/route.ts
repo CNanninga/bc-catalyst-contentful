@@ -11,3 +11,5 @@ import { defaultLocale, permanentRedirect } from '~/i18n/routing';
 export const GET = () => {
   permanentRedirect({ href: '/sitemap.xml', locale: defaultLocale });
 };
+
+export const runtime = 'edge';

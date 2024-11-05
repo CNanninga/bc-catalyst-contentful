@@ -128,3 +128,5 @@ export default async function Product({ params: { locale, slug }, searchParams }
     </>
   );
 }
+
+export const runtime = 'edge';

@@ -371,3 +371,5 @@ export default async function Compare({ searchParams }: Props) {
     </>
   );
 }
+
+export const runtime = 'edge';
