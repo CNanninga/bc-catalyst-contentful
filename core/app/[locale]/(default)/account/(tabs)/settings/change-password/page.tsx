@@ -30,5 +30,3 @@ export default async function ChangePassword({ params }: Props) {
     </>
   );
 }
-
-export const runtime = 'edge';

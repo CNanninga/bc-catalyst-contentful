@@ -146,5 +146,3 @@ export default async function Edit({ params }: Props) {
     </div>
   );
 }
-
-export const runtime = 'edge';
