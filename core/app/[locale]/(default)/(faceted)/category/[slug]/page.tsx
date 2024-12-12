@@ -148,5 +148,3 @@ export default async function Category(props: Props) {
     </div>
   );
 }
-
-export const runtime = 'edge';
