@@ -2,10 +2,12 @@ import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
 import { Metadata } from 'next';
 import { getFormatter, getTranslations, setRequestLocale } from 'next-intl/server';
 import { createSearchParamsCache, parseAsString } from 'nuqs/server';
-import { cache } from 'react';
+import { cache, Suspense } from 'react';
 
 import { Stream, Streamable } from '@/vibes/soul/lib/streamable';
 import { FeaturedProductCarousel } from '@/vibes/soul/sections/featured-product-carousel';
+import { ProductFaqs } from '~/components/custom/product-faqs';
+import { ProductFaqsSkeleton } from '~/components/custom/product-faqs/faqs';
 import { pricesTransformer } from '~/data-transformers/prices-transformer';
 import { productCardTransformer } from '~/data-transformers/product-card-transformer';
 import { productOptionsTransformer } from '~/data-transformers/product-options-transformer';
@@ -255,6 +257,10 @@ export default async function Product(props: Props) {
         quantityLabel={t('ProductDetails.quantity')}
         thumbnailLabel={t('ProductDetails.thumbnail')}
       />
+
+      <Suspense fallback={<ProductFaqsSkeleton />}>
+        <ProductFaqs productId={productId} />
+      </Suspense>
 
       <FeaturedProductCarousel
         cta={{ label: t('RelatedProducts.cta'), href: '/shop-all' }}
