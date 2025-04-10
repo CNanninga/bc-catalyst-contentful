@@ -17,6 +17,43 @@ export const HeaderFragment = graphql(`
         }
       }
     }
+    content {
+      headerPages: pages(filters: { isVisibleInNavigation: true }) {
+        edges {
+          node {
+            __typename
+            name
+            ... on RawHtmlPage {
+              path
+            }
+            ... on ContactPage {
+              path
+            }
+            ... on NormalPage {
+              path
+            }
+            ... on BlogIndexPage {
+              path
+            }
+            ... on ExternalLinkPage {
+              link
+            }
+          }
+        }
+      }
+    }
+    categoryTree {
+      name
+      path
+      children {
+        name
+        path
+        children {
+          name
+          path
+        }
+      }
+    }
     currencies(first: 25) {
       edges {
         node {
