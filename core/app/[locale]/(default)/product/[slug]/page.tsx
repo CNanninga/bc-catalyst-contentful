@@ -30,6 +30,9 @@ import {
   getStreamableProduct,
 } from './page-data';
 
+import { getCategoryContent } from '~/lib/contentful/client/queries/get-category-content';
+import CmsContent from '~/components/custom/contenful/cms-content';
+
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
   searchParams: Promise<SearchParams>;
@@ -336,6 +339,16 @@ export default async function Product({ params, searchParams }: Props) {
           thumbnailLabel={t('ProductDetails.thumbnail')}
         />
       </ProductAnalyticsProvider>
+
+      <Stream
+        value={Streamable.from(() => getCategoryContent('product', baseProduct.sku))}
+      >
+        {(cmsContent) => (
+          <div className="mx-auto w-full max-w-screen-2xl">
+            {cmsContent.length > 0 && <CmsContent blocks={cmsContent} />}
+          </div>
+        )}
+      </Stream>
 
       <Suspense fallback={<ProductFaqsSkeleton />}>
         <ProductFaqs productId={productId} />
