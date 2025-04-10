@@ -13,8 +13,8 @@ test-results/
 playwright-report/
 playwright/.cache/
 .tests
-bigcommerce.graphql
-bigcommerce-graphql.d.ts
+*.graphql
+*-graphql.d.ts
 .DS_Store
 coverage/
 .history
