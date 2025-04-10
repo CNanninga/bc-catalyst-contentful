@@ -18,6 +18,8 @@ import { search } from './_actions/search';
 import { switchCurrency } from './_actions/switch-currency';
 import { HeaderFragment, HeaderLinksFragment } from './fragment';
 
+import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
+
 const GetCartCountQuery = graphql(`
   query GetCartCountQuery($cartId: String) {
     site {
@@ -104,7 +106,7 @@ export const Header = async () => {
    */
     const slicedTree = categoryTree.slice(0, 6);
 
-    return slicedTree.map(({ name, path, children }) => ({
+    const categoryLinks = slicedTree.map(({ name, path, children }) => ({
       label: name,
       href: path,
       groups: children.map((firstChild) => ({
@@ -116,6 +118,18 @@ export const Header = async () => {
         })),
       })),
     }));
+
+    const webPages = (data.content.headerPages.edges) ? removeEdgesAndNodes(data.content.headerPages) : [];
+
+    const links = categoryLinks.concat(webPages.slice(0,2).map(webPage => {
+      return {
+        label: webPage.name,
+        href: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+        groups: [],
+      }
+    }));
+
+    return links;
   });
 
   const streamableCartCount = Streamable.from(async () => {
