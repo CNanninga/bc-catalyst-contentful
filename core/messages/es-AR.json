@@ -1,0 +1,701 @@
+{
+    "Home": {
+        "Slideshow": {
+            "Slide01": {
+                "title": "Nuevos hallazgos para cada ocasión",
+                "description": "Explora nuestras últimas novedades seleccionadas para ofrecerte estilo, funcionalidad e inspiración. Compra ahora y descubre tu próximo favorito.",
+                "alt": "Cinco plantas pequeñas en macetas exhibidas sobre bloques apilados de color beige, con una variedad de follaje verde en macetas de color gris oscuro contra un fondo neutro.",
+                "cta": "Comprar ahora"
+            },
+            "Slide02": {
+                "title": "Descubre las novedades",
+                "description": "Compra nuestras últimas novedades y encuentra algo fresco y emocionante para tu hogar.",
+                "alt": "Manos extendiéndose para sostener un helecho verde en una canasta tejida con un lazo decorativo, sobre un fondo beige con sombras suaves.",
+                "cta": "Comprar ahora"
+            },
+            "Slide03": {
+                "title": "Algo para todos",
+                "description": "No te pierdas las ofertas exclusivas en nuestros productos más vendidos. Compra hoy y ahorra mucho dinero en los artículos que te gustan.",
+                "alt": "Primer plano de una hoja verde vibrante con perforaciones, que muestra su textura suave y detalles naturales.",
+                "cta": "Comprar ahora"
+            }
+        },
+        "Carousel": {
+            "featuredProducts": "Productos destacados",
+            "newestProducts": "Productos más nuevos"
+        },
+        "FeaturedProducts": {
+            "title": "Colección destacada",
+            "description": "Explora nuestras mejores selecciones en esta colección destacada. ¡Encuentra el regalo perfecto o date un capricho!",
+            "cta": "Ver más",
+            "emptyStateTitle": "No se encontraron productos",
+            "emptyStateSubtitle": "Intenta navegar por nuestro catálogo completo de productos."
+        },
+        "NewestProducts": {
+            "title": "Novedades",
+            "description": "Nuestros últimos productos están aquí. Descubre lo nuevo de la tienda.",
+            "cta": "Ver todas",
+            "emptyStateTitle": "No se encontraron productos",
+            "emptyStateSubtitle": "Intenta navegar por nuestro catálogo completo de productos.",
+            "previousProducts": "Productos anteriores",
+            "nextProducts": "Siguientes productos"
+        },
+        "BestSellingProducts": {
+            "title": "Nuestros más vendidos",
+            "description": "Nuestros productos más vendidos están aquí. Descubre lo que es popular en la tienda.",
+            "cta": "Ver todas"
+        }
+    },
+    "ChangePassword": {
+        "title": "Cambiar contraseña",
+        "heading": "Cambiar contraseña",
+        "Form": {
+            "newPasswordLabel": "Nueva contraseña",
+            "confirmPasswordLabel": "Confirmar contraseña",
+            "confirmPasswordValidationMessage": "Las contraseñas ingresadas no coinciden. Vuelve a intentarlo.",
+            "successMessage": "¡La contraseña se actualizó correctamente!",
+            "confirmChangePassword": "Tu contraseña se ha actualizado correctamente. Inicia sesión con tus nuevas credenciales.",
+            "submit": "Cambiar contraseña",
+            "submitting": "Enviando..."
+        },
+        "Errors": {
+            "error": "Error desconocido."
+        }
+    },
+    "Login": {
+        "title": "Inicio de sesión",
+        "heading": "Inicio de sesión",
+        "Form": {
+            "invalidCredentials": "Tu dirección de correo electrónico o tu contraseña son incorrectas. Intenta iniciar sesión de nuevo o restablece tu contraseña",
+            "successful": "Has iniciado sesión correctamente.",
+            "emailLabel": "Correo electrónico",
+            "enterEmailMessage": "Ingresa tu correo electrónico",
+            "passwordLabel": "Contraseña",
+            "enterPasswordMessage": "Ingresa tu contraseña",
+            "submitting": "Enviando...",
+            "logIn": "Inicio de sesión",
+            "forgotPassword": "¿Olvidaste tu contraseña?",
+            "somethingWentWrong": "Algo salió mal. Vuelva a intentarlo más tarde."
+        },
+        "CreateAccount": {
+            "heading": "¿Nuevo cliente?",
+            "accountBenefits": "Crea una cuenta con nosotros y podrás:",
+            "fastCheckout": "Pagar más rápido",
+            "multipleAddresses": "Guardar varias direcciones de envío",
+            "ordersHistory": "Acceder a tu historial de pedidos",
+            "ordersTracking": "Rastrear nuevos pedidos",
+            "wishlists": "Guardar artículos en tu lista de deseos",
+            "createLink": "Crear cuenta "
+        },
+        "ForgotPassword": {
+            "title": "Olvidé la contraseña",
+            "heading": "Olvidé la contraseña",
+            "Form": {
+                "description": "A continuación, ingresa el correo electrónico asociado a tu cuenta. Te enviaremos instrucciones para restablecer tu contraseña.",
+                "emailLabel": "Correo electrónico",
+                "emailValidationMessage": "Ingresa un correo electrónico válido, como nombre@dominio.com",
+                "recaptchaText": "Pasar la comprobación de ReCAPTCHA",
+                "confirmResetPassword": "Si la dirección de correo electrónico {email} está vinculada a una cuenta en nuestra tienda, te hemos enviado un correo electrónico de restablecimiento de contraseña. Revisa tu bandeja de entrada y tu carpeta de correo no deseado si no lo ves.",
+                "submitting": "Enviando...",
+                "submit": "Restablecer la contraseña"
+            },
+            "Errors": {
+                "error": "Error desconocido."
+            }
+        }
+    },
+    "Register": {
+        "title": "Registrar cuenta",
+        "heading": "Cuenta nueva",
+        "successfulUpdate": "La cuenta se ha actualizado correctamente.",
+        "Form": {
+            "submit": "Crear cuenta",
+            "submitting": "Creando cuenta…",
+            "recaptchaText": "Pasar la comprobación de ReCAPTCHA",
+            "confirmPassword": "Las contraseñas no coinciden",
+            "successMessage": "La cuenta se creó correctamente."
+        },
+        "Errors": {
+            "inputError": "Ocurrió un error en el procesamiento de la entrada del usuario.",
+            "apiError": "Parece que estamos experimentando un error en el servidor, inténtalo de nuevo en unos minutos.",
+            "error": "Algo salió mal. Vuelva a intentarlo más tarde."
+        }
+    },
+    "FacetedGroup": {
+        "MobileSideNav": {
+            "filters": "Filtros",
+            "showFilters": "Mostrar filtros",
+            "subCategories": "Categorías"
+        },
+        "FacetedSearch": {
+            "filters": "Filtros",
+            "resetFilters": "Restablecer filtros",
+            "Range": {
+                "apply": "Aplicar"
+            },
+            "RefineBy": {
+                "refineBy": "Refinar por",
+                "clearAllRefinements": "Borrar todo"
+            },
+            "Facets": {
+                "updatePriceButton": "Actualizar precio",
+                "freeShippingLabel": "Envío gratuito",
+                "isFeaturedLabel": "Destacado",
+                "inStockLabel": "En existencias",
+                "rating": "{currentRating, plural, =1 {1 estrella} other {# estrellas}} y más",
+                "priceFilter": {
+                    "minPricePlaceholder": "{currencySign} mín.",
+                    "minPriceAriaLabel": "Precio mínimo",
+                    "maxPricePlaceholder": "{currencySign} máx.",
+                    "maxPriceAriaLabel": "Precio máximo"
+                }
+            }
+        },
+        "SortBy": {
+            "ariaLabel": "Ordenar por:",
+            "featuredItems": "Elementos destacados",
+            "bestSellingItems": "Artículos más vendidos",
+            "newestItems": "Artículos más nuevos",
+            "aToZ": "A a la Z",
+            "zToA": "Z a la A",
+            "byReview": "Por opinión",
+            "priceAscending": "Precio: ascendente",
+            "priceDescending": "Precio: descendente",
+            "relevance": "Relevancia"
+        }
+    },
+    "Brand": {
+        "sortBy": "{items, plural, =0 {sin artículos} =1 {1 artículo} other {# artículos}}",
+        "products": "Productos",
+        "emptyStateTitle": "No hay productos en esta marca.",
+        "emptyStateSubtitle": "Intenta usar diferentes filtros."
+    },
+    "Category": {
+        "sortBy": "{items, plural, =0 {sin artículos} =1 {1 artículo} other {# artículos}}",
+        "products": "Productos",
+        "items": "Artículos",
+        "Empty": {
+            "title": "Ningún producto en esta categoría",
+            "subtitle": "Intenta usar diferentes filtros.",
+            "cta": "Regresar a la página de inicio"
+        }
+    },
+    "Search": {
+        "title": "Resultados de búsqueda",
+        "heading": "Buscar",
+        "products": "Productos",
+        "sortBy": "{items, plural, =0 {sin artículos} =1 {1 artículo} other {# artículos}}",
+        "searchResults": "Resultados de búsqueda para",
+        "emptyStateTitle": "Lo sentimos, no hay resultados para “{term}”.",
+        "emptyStateSubtitle": "Prueba con otra búsqueda.",
+        "Breadcrumbs": {
+            "home": "Página de inicio",
+            "search": "Buscar"
+        }
+    },
+    "Account": {
+        "Layout": {
+            "addresses": "Direcciones",
+            "logout": "Cerrar sesión",
+            "orders": "Pedidos",
+            "settings": "Cuenta",
+            "wishlists": "Listas de deseos",
+            "recentlyViewed": "Visto recientemente"
+        },
+        "Orders": {
+            "title": "Pedidos",
+            "orderNumber": "Núm. de pedido",
+            "totalPrice": "Total",
+            "viewDetails": "Ver detalles",
+            "noOrders": "Aún no hay pedidos"
+        },
+        "OrderDetails": {
+            "title": "Pedido núm.{orderNumber}",
+            "shippingAddressLabel": "Dirección de envío",
+            "shippingMethodLabel": "Método de envío",
+            "summaryTotalLabel": "Total",
+            "destinationTitle": "Destino",
+            "destinationWithCountTitle": "Destino {number}/{total}",
+            "summarySubtotalLabel": "Subtotal",
+            "summaryShippingLabel": "Envío",
+            "summaryTaxLabel": "Impuesto"
+        },
+        "Addresses": {
+            "title": "Direcciones",
+            "showAddFormLabel": "Agregar dirección",
+            "editLabel": "Editar",
+            "deleteLabel": "Eliminar",
+            "cancelLabel": "Cancelar",
+            "createLabel": "Crear",
+            "updateLabel": "Actualizar",
+            "setDefaultLabel": "Establecer como predeterminado",
+            "Errors": {
+                "apiError": "Parece que estamos experimentando un error en el servidor, inténtalo de nuevo en unos minutos.",
+                "error": "Error desconocido."
+            }
+        },
+        "Settings": {
+            "title": "CONFIGURACIÓN DE CUENTA",
+            "emptyTextValidatoinMessage": "Este campo no puede estar vacío",
+            "cancel": "Cancelar",
+            "changePassword": "Cambiar contraseña",
+            "submit": "ACTUALICE LA CONFIGURACIÓN",
+            "submitting": "Actualizar configuración...",
+            "successMessage": "Se actualizó la configuración de tu cuenta",
+            "validationMessages": {
+                "email": "Ingresa un correo electrónico válido, como nombre@dominio.com",
+                "empty": "Este campo no puede estar vacío",
+                "firstName": "Ingresa tu nombre",
+                "lastName": "Ingresa tu apellido",
+                "city": "Introduce un barrio o una ciudad",
+                "company": "Introduce el nombre de la empresa",
+                "phone": "Introduce un número de teléfono"
+            },
+            "ChangePassword": {
+                "title": "Cambiar contraseña",
+                "success": "La contraseña se actualizó correctamente.",
+                "error": "Error desconocido.",
+                "currentPasswordLabel": "Contraseña actual",
+                "newPasswordLabel": "Nueva contraseña",
+                "confirmPasswordLabel": "Confirmar contraseña",
+                "cancel": "Cancelar",
+                "confirmPasswordValidationMessage": "Las contraseñas ingresadas no coinciden. Vuelve a intentarlo.",
+                "newPasswordValidationMessage": "La nueva contraseña debe ser diferente de la contraseña actual o coincidir con la contraseña de confirmación.",
+                "notEmptyMessage": "El campo no debe estar vacío",
+                "confirmChangePassword": "Tu contraseña se ha actualizado correctamente. Inicia sesión con tus nuevas credenciales.",
+                "spinnerText": "Enviando...",
+                "submitText": "Cambiar contraseña"
+            },
+            "UpdateCustomer": {
+                "successMessage": "Se actualizó la configuración de tu cuenta",
+                "Errors": {
+                    "inputError": "Ocurrió un error en el procesamiento de la entrada del usuario.",
+                    "notFound": "El cliente no existe"
+                }
+            }
+        },
+        "Wishlists": {
+            "title": "Wish Lists",
+            "new": "New wish list",
+            "items": "{count, plural, =1 {1 item} other {# items}}",
+            "viewWishlist": "View list",
+            "noWishlists": "You don't have any wish lists",
+            "noWishlistsSubtitle": "Create a wishlist to save your favorite products.",
+            "noWishlistsCallToAction": "Create a wishlist",
+            "emptyWishlist": "You haven't added products to this wish list.",
+            "share": "Compartir",
+            "shareSuccess": "Wish list has been shared successfully.",
+            "shareCopied": "Wish list public URL has been copied to your clipboard.",
+            "shareDisabled": "Your wish list must be public in order to share it.",
+            "makePublic": "Make public",
+            "makePrivate": "Make private",
+            "rename": "Rename",
+            "delete": "Eliminar",
+            "Visibility": {
+                "public": "Public",
+                "private": "Private"
+            },
+            "Modal": {
+                "cancel": "Cancelar",
+                "close": "Close",
+                "copy": "Copy",
+                "create": "Crear",
+                "save": "Save",
+                "delete": "Eliminar",
+                "newTitle": "Create a new wish list",
+                "shareTitle": "Share {name}",
+                "renameTitle": "Rename {name}",
+                "deleteTitle": "Delete {name}",
+                "changeVisibilityPublicTitle": "Make {name} public?",
+                "changeVisibilityPrivateTitle": "Make {name} private?",
+                "makePublicContent": "Are you sure you want to make <bold>{name}</bold> public? This will allow others to see your wish list if they have the link.",
+                "makePrivateContent": "Are you sure you want to make <bold>{name}</bold> private? If you've shared your wish list with others, they will no longer be able to see it.",
+                "deleteContent": "Are you sure you want to delete <bold>{name}</bold>? This action cannot be undone."
+            },
+            "Form": {
+                "nameLabel": "Name"
+            },
+            "Errors": {
+                "nameRequired": "Wish list name cannot be empty.",
+                "updateFailed": "Failed to update your wish list. Please try again.",
+                "deleteFailed": "Failed to delete your wish list. Please try again.",
+                "removeProductFailed": "Failed to remove the product from your wish list. Please try again.",
+                "unauthorized": "You are not authorized to perform this action. Please sign in and try again.",
+                "unexpected": "An unexpected error occurred. Please try again."
+            },
+            "Result": {
+                "createSuccess": "Wish list has been created successfully.",
+                "updateSuccess": "Wish list has been updated successfully.",
+                "deleteSuccess": "Wish list has been deleted successfully.",
+                "removeItemSuccess": "Item has been removed from your wish list."
+            }
+        }
+    },
+    "PublicWishlist": {
+        "title": "Public Wish List",
+        "defaultName": "Public wish list"
+    },
+    "Blog": {
+        "title": "Blog",
+        "Empty": {
+            "title": "No se encontraron publicaciones de blog",
+            "subtitle": "Vuelve a consultar más tarde para obtener más contenido"
+        },
+        "SharingLinks": {
+            "share": "Compartir",
+            "email": "Correo electrónico",
+            "print": "Imprimir"
+        }
+    },
+    "Cart": {
+        "title": "Carrito",
+        "heading": "Tu carrito",
+        "empty": "Tu carrito esta vacío",
+        "emptyDetails": "Parece que no agregaste nada a tu carrito. No pierdas tiempo y explora las principales categorías",
+        "proceedToCheckout": "Continuar con el proceso de pago",
+        "loading": "Cargando...",
+        "spinnerText": "Actualizando…",
+        "increment": "Aumenta la cantidad",
+        "decrement": "Disminuir cantidad",
+        "removeItem": "Eliminar artículo",
+        "cartCombined": "Notamos que tenías artículos guardados en un carrito anterior, así que los hemos agregado a tu carrito actual.",
+        "cartRestored": "Iniciaste un carrito en otro dispositivo y lo hemos restaurado aquí para que puedas continuar desde donde lo dejaste.",
+        "CheckoutSummary": {
+            "title": "Resumen",
+            "subTotal": "Subtotal",
+            "discounts": "Descuentos",
+            "remove": "Quitar",
+            "spinnerText": "Eliminando…",
+            "tax": "Impuesto",
+            "total": "Total",
+            "errorMessage": "No se encontró el resumen del carrito. Vuelve a intentarlo.",
+            "CouponCode": {
+                "apply": "Aplicar",
+                "couponCode": "Código de cupón",
+                "removeCouponCode": "Elimina el código de cupón",
+                "invalidCouponCode": "Ingresa un código de cupón válido",
+                "cartNotFound": "No se encontró ninguna cookie de cartId."
+            },
+            "Shipping": {
+                "shipping": "Envío",
+                "add": "Agregar",
+                "change": "Cambiar",
+                "cancel": "Cancelar",
+                "country": "País",
+                "city": "Ciudad",
+                "state": "Estado/Provincia",
+                "postalCode": "Código postal",
+                "updatedShippingOptions": "Actualiza las opciones de envío",
+                "viewShippingOptions": "Ver opciones de envío",
+                "editAddress": "Editar dirección",
+                "shippingOptions": "Opciones de envío",
+                "updateShipping": "Actualizar envío",
+                "addShipping": "Agregar envío",
+                "cartNotFound": "No se encontró ninguna cookie de cartId.",
+                "noShippingOptions": "No hay opciones de envío disponibles para tu dirección"
+            }
+        },
+        "ShippingInfo": {
+            "country": "País",
+            "countryPlaceholder": "Seleccionar país",
+            "state": "Estado/Provincia",
+            "statePlaceholder": "Seleccionar estado",
+            "city": "Área/Ciudad",
+            "cityPlaceholder": "Ciudad",
+            "postcode": "Código postal",
+            "postcodePlaceholder": "Código postal",
+            "errorMessage": "Se produjo un error. Vuelve a intentarlo."
+        },
+        "SubmitShippingInfo": {
+            "spinnerText": "Enviando...",
+            "submitText": "Calcular el envío"
+        },
+        "ShippingCost": {
+            "shippingOptions": "Opciones disponibles",
+            "radioGroupAriaLabel": "Opciones de envío disponibles",
+            "noAvailableOptions": "No hay opciones de envío disponibles. Revisa los detalles proporcionados y vuelve a intentarlo.",
+            "errorMessage": "Se produjo un error. Vuelve a intentarlo."
+        },
+        "SubmitShippingCost": {
+            "spinnerText": "Enviando...",
+            "submitText": "Actualizar costo de envío"
+        },
+        "SubmitCouponCode": {
+            "spinnerText": "Enviando...",
+            "submitText": "Aplicar"
+        },
+        "SubmitItemQuantity": {
+            "spinnerText": "Actualizando…",
+            "submitReduceText": "Disminuir número",
+            "submitIncreaseText": "Aumentar número",
+            "errorMessage": "Se produjo un error al actualizar la cantidad de artículos. Vuelve a intentarlo."
+        },
+        "SubmitRemoveItem": {
+            "remove": "Quitar",
+            "spinnerText": "Eliminando…",
+            "errorMessage": "Se produjo un error al eliminar el artículo. Vuelve a intentarlo."
+        },
+        "Empty": {
+            "title": "Su carrito está vacío.",
+            "subtitle": "Agrega algunos productos para comenzar.",
+            "cta": "Seguir comprando"
+        },
+        "Errors": {
+            "cartNotFound": "No se encontró ninguna cookie de cartId.",
+            "lineItemNotFound": "Artículo no encontrado.",
+            "failedToRedirectToCheckout": "No se pudo redirigir a la caja.",
+            "failedToUpdateQuantity": "No se pudo actualizar la cantidad.",
+            "somethingWentWrong": "Algo salió mal. Vuelva a intentarlo más tarde."
+        }
+    },
+    "Compare": {
+        "title": "Compare products",
+        "addToCart": "Agregar al carrito",
+        "next": "Siguientes productos",
+        "previous": "Productos anteriores",
+        "noProductsToCompare": "No products to compare",
+        "sku": "SKU",
+        "weight": "Peso",
+        "description": "Descripción",
+        "noDescription": "There is no description available.",
+        "rating": "Calificación",
+        "noRatings": "There are no reviews.",
+        "otherDetails": "Other details",
+        "noOtherDetails": "There are no other details.",
+        "viewOptions": "Opciones de visualización",
+        "successMessage": "{cartItems, plural, =1 {1 artículo} other {# artículos}} agregado(s) a <cartLink>tu carrito</cartLink>"
+    },
+    "Product": {
+        "ProductDetails": {
+            "quantity": "Cantidad",
+            "increaseQuantity": "Aumenta la cantidad",
+            "decreaseQuantity": "Disminuir cantidad",
+            "successMessage": "{cartItems, plural, =1 {1 artículo} other {# artículos}} agregado(s) a <cartLink>tu carrito</cartLink>",
+            "missingCart": "Carrito no encontrado. Intenta de nuevo más tarde.",
+            "unknownError": "Error desconocido. Vuelva a intentarlo más tarde.",
+            "variantRequiredError": "This product requires options to be selected in order to add to the cart.",
+            "increaseNumber": "Aumentar número",
+            "decreaseNumber": "Disminuir número",
+            "thumbnail": "Ver número de imagen",
+            "additionalInformation": "Información adicional",
+            "Submit": {
+                "addToCart": "Agregar al carrito",
+                "outOfStock": "Agotado/a",
+                "preorder": "Pedido anticipado",
+                "unavailable": "No disponible"
+            },
+            "Accordions": {
+                "specifications": "Especificaciones",
+                "warranty": "Garantía",
+                "sku": "SKU",
+                "weight": "Peso",
+                "condition": "Condición"
+            },
+            "Prices": {
+                "msrp": "PVSF",
+                "was": "Era",
+                "now": "Ahora"
+            }
+        },
+        "RelatedProducts": {
+            "title": "Productos relacionados",
+            "noRelatedProducts": "No se encontraron productos relacionados",
+            "browseCatalog": "Intenta navegar por nuestro catálogo completo de productos.",
+            "cta": "Comprar todos",
+            "previousProducts": "Productos anteriores",
+            "nextProducts": "Siguientes productos",
+            "scrollbar": "Barra de desplazamiento de productos relacionados"
+        },
+        "Reviews": {
+            "title": "Reseñas",
+            "empty": "No se han agregado reseñas para este producto.",
+            "Pagination": {
+                "previous": "Reseñas anteriores",
+                "next": "Próximas reseñas"
+            }
+        }
+    },
+    "WebPages": {
+        "ContactUs": {
+            "Form": {
+                "success": "Gracias por ponerte en contacto. Nos comunicaremos contigo pronto.",
+                "successCta": "Seguir comprando",
+                "error": "Error desconocido.",
+                "fullNameLabel": "Nombre completo",
+                "companyNameLabel": "Nombre de la empresa",
+                "phoneLabel": "Teléfono",
+                "orderNoLabel": "Número de pedido",
+                "rmaLabel": "Número de RMA (autorización de devolución)",
+                "emailLabel": "Correo electrónico",
+                "emailValidationMessage": "Ingresa un correo electrónico válido, como nombre@dominio.com",
+                "commentsLabel": "Comentarios/Preguntas",
+                "commentsValidationMessage": "Proporciona un comentario válido",
+                "recaptchaText": "Pasar la comprobación de ReCAPTCHA",
+                "onSubmitText": "Enviando...",
+                "submitFormText": "Enviar formulario",
+                "Errors": {
+                    "inputError": "Ocurrió un error en el procesamiento de la entrada del usuario.",
+                    "apiError": "Parece que estamos experimentando un error en el servidor, inténtalo de nuevo en unos minutos.",
+                    "error": "Algo salió mal. Vuelva a intentarlo más tarde."
+                }
+            }
+        }
+    },
+    "Maintenance": {
+        "title": "MANTENIMIENTO",
+        "message": "Estamos fuera de servicio por mantenimiento",
+        "contactUs": "Puedes contactarnos en:"
+    },
+    "StoreSelector": {
+        "title": "Selector de tienda",
+        "heading": "Selecciona un idioma y una región"
+    },
+    "Error": {
+        "heading": "Hubo un error en el servidor.",
+        "message": "Vuelva a intentarlo más tarde."
+    },
+    "NotFound": {
+        "heading": "No pudimos encontrar esa página.",
+        "message": "Lo sentimos, pero parece que la página solicitada cambió de lugar o ya no existe.",
+        "Carousel": {
+            "featuredProducts": "Productos destacados"
+        }
+    },
+    "Components": {
+        "Header": {
+            "home": "Página de inicio",
+            "toggleNavigation": "Alternar navegación",
+            "Icons": {
+                "account": "Perfil",
+                "cart": "Carrito",
+                "search": "Buscar"
+            },
+            "Account": {
+                "account": "Cuenta",
+                "orders": "Pedidos",
+                "addresses": "Direcciones",
+                "accountSettings": "CONFIGURACIÓN DE CUENTA",
+                "login": "Inicio de sesión",
+                "logout": "Cerrar sesión"
+            },
+            "Currency": {
+                "invalidCurrency": "Moneda inválida",
+                "errorUpdatingCurrency": "Error al actualizar la moneda de tu carrito. Vuelve a intentarlo."
+            },
+            "Locale": {
+                "invalidLocale": "Campo regional no válido"
+            },
+            "MiniCart": {
+                "cart": "Carrito",
+                "items": "Artículos en el carrito"
+            },
+            "Navigation": {
+                "toggle": "Alternar navegación",
+                "navigationMenu": "Menú de navegación"
+            },
+            "Search": {
+                "openSearchPopup": "Abrir ventana emergente de búsqueda",
+                "closeSearchPopup": "Cerrar ventana emergente de búsqueda",
+                "searchBar": "Barra de búsqueda",
+                "photo": "Foto",
+                "products": "Productos",
+                "categories": "Categorías",
+                "brands": "Marcas",
+                "noSearchResultsTitle": "Lo sentimos, no hay resultados para “{term}”.",
+                "noSearchResultsSubtitle": "Prueba con otra búsqueda.",
+                "searchPlaceholder": "Buscar...",
+                "clearSearch": "Borrar búsqueda",
+                "processing": "Procesando…",
+                "error": "Algo salió mal. Vuelva a intentarlo."
+            }
+        },
+        "Footer": {
+            "home": "Página de inicio",
+            "contact": "Contacto",
+            "socialMediaLinks": "Enlaces a redes sociales"
+        },
+        "Subscribe": {
+            "title": "Suscríbete a nuestro boletín informativo",
+            "placeholder": "Ingresa tu correo electrónico",
+            "description": "Mantente al día con las últimas noticias y ofertas de nuestra tienda.",
+            "success": "¡Gracias por tu interés! ¡La función de boletín llegará pronto!"
+        },
+        "Breadcrumb": {
+            "breadcrumb": "Miga de pan"
+        },
+        "Compare": {
+            "compareButton": "Comparar ({products})",
+            "productPhoto": "Foto",
+            "removeProductAriaLabel": "Eliminar {product} de la lista de comparación"
+        },
+        "SearchForm": {
+            "searchProducts": "Buscar productos",
+            "searchPlaceholder": "Buscar...",
+            "search": "Buscar",
+            "noSearchResults": "Lo sentimos, no hay resultados para “{term}”.",
+            "checkSpelling": "Revisa la ortografía o intenta realizar otra búsqueda."
+        },
+        "AddToCartButton": {
+            "addToCart": "Agregar al carrito",
+            "outOfStock": "Agotado/a",
+            "preorder": "Pedido anticipado",
+            "unavailable": "No disponible",
+            "processing": "Procesando…"
+        },
+        "ProductCard": {
+            "Compare": {
+                "compare": "Comparar",
+                "remove": "Quitar",
+                "maxCompareLimit": "You've reached the maximum number of products for comparison. Remove a product to add a new one."
+            },
+            "AddToCart": {
+                "viewOptions": "Opciones de visualización",
+                "success": "{cartItems, plural, =1 {1 artículo} other {# artículos}} agregado(s) a <cartLink>tu carrito</cartLink>"
+            }
+        },
+        "Slideshow": {
+            "slideshow": "Presentación interactiva",
+            "slide": "Diapositiva",
+            "previousSlide": "Diapositiva anterior",
+            "nextSlide": "Siguiente diapositiva",
+            "slideNo": "{n} de {total}",
+            "pause": "Pausar presentación",
+            "play": "Reproducir presentación"
+        },
+        "Pagination": {
+            "pagination": "paginación",
+            "previous": "Anterior",
+            "next": "Siguiente"
+        },
+        "Carousel": {
+            "carousel": "Carrusel",
+            "previousProducts": "Productos anteriores",
+            "nextProducts": "Siguientes productos",
+            "slides": "Diapositivas",
+            "goto": "Ir a la diapositiva {n}"
+        },
+        "FormFields": {
+            "Validation": {
+                "address1": "Introduce una dirección",
+                "address2": "Introduce una dirección",
+                "city": "Introduce un barrio o una ciudad",
+                "company": "Introduce el nombre de la empresa",
+                "confirmPassword": "Las contraseñas no coinciden",
+                "email": "Ingresa un correo electrónico válido, como nombre@dominio.com",
+                "empty": "Este campo no puede estar vacío",
+                "firstName": "Ingresa tu nombre",
+                "lastName": "Ingresa tu apellido",
+                "numbersOnly": "Ingresa solo números",
+                "numbersOverflow": "El valor ingresado supera el rango máximo de {max}",
+                "numbersUnderflow": "El valor ingresado no alcanza el rango mínimo de {min}",
+                "password": "Ingresa una contraseña",
+                "phone": "Introduce un número de teléfono",
+                "postalCode": "Introduce un código postal"
+            },
+            "Counter": {
+                "increase": "Aumentar número",
+                "decrease": "Disminuir número"
+            }
+        }
+    }
+}
