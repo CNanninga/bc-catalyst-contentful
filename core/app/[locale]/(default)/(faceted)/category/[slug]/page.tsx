@@ -25,6 +25,9 @@ import { fetchFacetedSearch } from '../../fetch-faceted-search';
 import { CategoryViewed } from './_components/category-viewed';
 import { getCategoryPageData } from './page-data';
 
+import { getCategoryContent } from '~/lib/contentful/client/queries/get-category-content';
+import CmsContent from '~/components/custom/contenful/cms-content';
+
 const cachedCategoryDataVariables = cache((categoyId: string) => {
   return {
     categoryId: Number(categoyId),
@@ -334,8 +337,22 @@ export default async function Category(props: Props) {
 
   setRequestLocale(locale);
 
+  const category = await getCategory(props);
+  const catPath = category.path.replace(/(\/$)/, '').replace(/^\//, '');
+  const cmsContent = await getCategoryContent('category', catPath);
+
   return (
     <>
+      <Stream
+        value={Streamable.from(() => getCategoryContent('category', catPath))}
+      >
+        {(cmsContent) => (
+          <>
+            {cmsContent.length > 0 && <CmsContent blocks={cmsContent} />}
+          </>
+        )}
+      </Stream>
+
       <ProductsListSection
         breadcrumbs={Streamable.from(() => getBreadcrumbs(props))}
         compareLabel={Streamable.from(getCompareLabel)}
@@ -362,11 +379,10 @@ export default async function Category(props: Props) {
       />
       <Stream
         value={Streamable.all([
-          Streamable.from(() => getCategory(props)),
           Streamable.from(() => getProducts(props)),
         ])}
       >
-        {([category, products]) => (
+        {([products]) => (
           <CategoryViewed category={category} categoryId={category.entityId} products={products} />
         )}
       </Stream>

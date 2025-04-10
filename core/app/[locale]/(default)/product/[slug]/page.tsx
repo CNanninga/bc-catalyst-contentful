@@ -20,6 +20,9 @@ import { ProductViewed } from './_components/product-viewed';
 import { PaginationSearchParamNames, Reviews } from './_components/reviews';
 import { getProductData } from './page-data';
 
+import { getCategoryContent } from '~/lib/contentful/client/queries/get-category-content';
+import CmsContent from '~/components/custom/contenful/cms-content';
+
 const cachedProductDataVariables = cache(
   async (productId: string, searchParams: Props['searchParams']) => {
     const options = await searchParams;
@@ -115,6 +118,7 @@ const getProduct = async (props: Props) => {
   return {
     id: product.entityId.toString(),
     title: product.name,
+    sku: product.sku,
     description: <div dangerouslySetInnerHTML={{ __html: product.description }} />,
     plainTextDescription: product.plainTextDescription,
     href: product.path,
@@ -241,6 +245,8 @@ export default async function Product(props: Props) {
   const variables = await cachedProductDataVariables(slug, props.searchParams);
   const parsedSearchParams = searchParamsCache.parse(props.searchParams);
 
+  const product = await getProduct(props);
+
   return (
     <>
       <ProductDetail
@@ -252,11 +258,21 @@ export default async function Product(props: Props) {
         fields={Streamable.from(() => getFields(props))}
         incrementLabel={t('ProductDetails.increaseQuantity')}
         prefetch={true}
-        product={Streamable.from(() => getProduct(props))}
+        product={product}
         productId={productId}
         quantityLabel={t('ProductDetails.quantity')}
         thumbnailLabel={t('ProductDetails.thumbnail')}
       />
+
+      <Stream
+        value={Streamable.from(() => getCategoryContent('product', product.sku))}
+      >
+        {(cmsContent) => (
+          <div className="mx-auto w-full max-w-screen-2xl">
+            {cmsContent.length > 0 && <CmsContent blocks={cmsContent} />}
+          </div>
+        )}
+      </Stream>
 
       <Suspense fallback={<ProductFaqsSkeleton />}>
         <ProductFaqs productId={productId} />
