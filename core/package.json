@@ -55,6 +55,7 @@
     "nuqs": "^2.4.2",
     "p-lazy": "^5.0.0",
     "react": "^19.1.0",
+    "react-compare-slider": "3.1.0",
     "react-day-picker": "^9.6.7",
     "react-dom": "^19.1.0",
     "react-google-recaptcha": "^3.1.0",
