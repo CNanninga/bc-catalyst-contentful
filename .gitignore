@@ -11,7 +11,7 @@ dist
 test-results/
 playwright-report/
 playwright/.cache/
-bigcommerce.graphql
-bigcommerce-graphql.d.ts
+*.graphql
+*-graphql.d.ts
 .DS_Store
 coverage/
