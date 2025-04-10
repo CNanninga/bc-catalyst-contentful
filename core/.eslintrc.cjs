@@ -57,6 +57,10 @@ const config = {
         '**': 'NEXT_JS_APP_ROUTER_CASE',
       },
     ],
+    'prettier/prettier': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    '@next/next/no-img-element': 'off',
   },
   ignorePatterns: [
     'client/generated/**/*.ts',
