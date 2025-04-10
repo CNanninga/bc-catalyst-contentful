@@ -18,6 +18,8 @@ import { search } from './_actions/search';
 import { switchCurrency } from './_actions/switch-currency';
 import { HeaderFragment } from './fragment';
 
+import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
+
 const GetCartCountQuery = graphql(`
   query GetCartCountQuery($cartId: String) {
     site {
@@ -52,7 +54,7 @@ const getLinks = async () => {
    */
   const categoryTree = data.categoryTree.slice(0, 6);
 
-  return categoryTree.map(({ name, path, children }) => ({
+  const categoryLinks = categoryTree.map(({ name, path, children }) => ({
     label: name,
     href: path,
     groups: children.map((firstChild) => ({
@@ -64,6 +66,18 @@ const getLinks = async () => {
       })),
     })),
   }));
+
+  const webPages = (data.content.headerPages.edges) ? removeEdgesAndNodes(data.content.headerPages) : [];
+
+  const links = categoryLinks.concat(webPages.slice(0,2).map(webPage => {
+    return {
+      label: webPage.name,
+      href: webPage.__typename === 'ExternalLinkPage' ? webPage.link : webPage.path,
+      groups: [],
+    }
+  }));
+
+  return links;
 };
 
 const getLogo = async () => {
