@@ -47,6 +47,12 @@ importers:
       '@conform-to/zod':
         specifier: ^1.6.1
         version: 1.6.1(zod@3.25.51)
+      '@contentful/rich-text-react-renderer':
+        specifier: ^15.22.11
+        version: 15.22.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@contentful/rich-text-types':
+        specifier: ^16.8.5
+        version: 16.8.5
       '@icons-pack/react-simple-icons':
         specifier: ^11.2.0
         version: 11.2.0(react@19.1.0)
@@ -1267,6 +1273,17 @@ packages:
     resolution: {integrity: sha512-uhViaaxJ4IJsCwBxHRNQKU1kT2t7W0/a4/YHv3Qy0J0CQu/HB+UHORlhTjoHpH4XlRS+N6vdO+5qZOC1Oi1QPg==}
     peerDependencies:
       zod: ^3.21.0
+
+  '@contentful/rich-text-react-renderer@15.22.11':
+    resolution: {integrity: sha512-IDDdiFSab+C3G2HZRbFegTFuagl8dZpJHgWevoS9ODbatgC9GU6LcLz2hz7KKazsxuBJzgxnFsPd2v5+EtTHrg==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      react: ^16.8.6 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.6 || ^17.0.0 || ^18.0.0
+
+  '@contentful/rich-text-types@16.8.5':
+    resolution: {integrity: sha512-q18RJuJCOuYveGiCIjE5xLCQc5lZ3L2Qgxrlg/H2YEobDFqdtmklazRi1XwEWaK3tMg6yVXBzKKkQfLB4qW14A==}
+    engines: {node: '>=6.0.0'}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -12244,6 +12261,14 @@ snapshots:
     dependencies:
       '@conform-to/dom': 1.6.1
       zod: 3.25.51
+
+  '@contentful/rich-text-react-renderer@15.22.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@contentful/rich-text-types': 16.8.5
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  '@contentful/rich-text-types@16.8.5': {}
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
