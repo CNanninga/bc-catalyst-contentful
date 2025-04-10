@@ -29,7 +29,12 @@
             "name": "bigcommerce",
             "schema": "./bigcommerce.graphql",
             "tadaOutputLocation": "./bigcommerce-graphql.d.ts"
-          }
+          },
+          {
+            "name": "contentful",
+            "schema": "./contentful.graphql",
+            "tadaOutputLocation": "./contentful-graphql.d.ts"
+          },
         ]
       }
     ],
