@@ -16,6 +16,8 @@
     "@bigcommerce/catalyst-client": "workspace:^",
     "@conform-to/react": "^1.6.1",
     "@conform-to/zod": "^1.6.1",
+    "@contentful/rich-text-react-renderer": "^15.22.11",
+    "@contentful/rich-text-types": "^16.8.5",
     "@icons-pack/react-simple-icons": "^11.2.0",
     "@makeswift/runtime": "^0.25.0",
     "@radix-ui/react-accordion": "^1.2.11",
