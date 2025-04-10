@@ -38,11 +38,7 @@ Two new Makeswift-enabled components are added:
 
 ### Web Pages in Main Nav
 
-Changes to main nav:
-
-* Fewer top-level categories loaded
-* Limited number of Web Pages loaded and displayed alongside top-level categories
-* Three hierarchical levels supported for Web Pages, similar to categories
+Limited number of Web Pages loaded and displayed alongside top-level categories
 
 ## Configuration
 
