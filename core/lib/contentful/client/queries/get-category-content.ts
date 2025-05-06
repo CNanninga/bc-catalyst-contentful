@@ -3,6 +3,8 @@ import { cache } from 'react';
 import { contentfulFetch } from '..';
 import { contentfulGraphql, FragmentOf } from '../graphql';
 
+import { normalizeLocale } from '../locales';
+
 export const BLOCK_BANNER_FRAGMENT = contentfulGraphql(
   `
     fragment BlockBannerFields on BlockBanner {
@@ -83,12 +85,14 @@ export const BLOCK_IMAGE_FRAGMENT = contentfulGraphql(
 const GET_CATEGORY_CONTENT_QUERY = contentfulGraphql(
   `
     query ContentCollection(
-      $type: String
-      $slug: String
+      $locale: String,
+      $type: String,
+      $slug: String,
     ) {
       categoryContentCollection(
         where: {slug: $slug, type: $type}, 
-        limit: 1
+        limit: 1,
+        locale: $locale
       ) {
         items {
           contentCollection(limit: 10) {
@@ -128,10 +132,10 @@ type BlockSimpleText = FragmentOf<typeof BLOCK_SIMPLE_TEXT_FRAGMENT>;
 export type ContentItem = { "__typename": string } & BlockBanner & BlockImage & BlockRichText & BlockSimpleText;
 
 export const getCategoryContent = cache(
-  async (type: string, slug: string) => {
+  async (type: string, slug: string, locale: string = 'en-US' ) => {
     const response = await contentfulFetch({
       document: GET_CATEGORY_CONTENT_QUERY,
-      variables: { type, slug }
+      variables: { locale: normalizeLocale(locale), type, slug }
     });
 
     return response.data.categoryContentCollection?.items[0]?.contentCollection?.items ?? [];
