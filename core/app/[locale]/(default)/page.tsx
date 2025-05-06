@@ -19,7 +19,7 @@ interface Props {
 export default async function Home({ params }: Props) {
   const { locale } = await params;
 
-  const cmsContent = await getCategoryContent('home', 'home');
+  const cmsContent = await getCategoryContent('home', 'home', locale);
 
   return (
     <>
