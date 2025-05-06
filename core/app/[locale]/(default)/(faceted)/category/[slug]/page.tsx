@@ -339,12 +339,11 @@ export default async function Category(props: Props) {
 
   const category = await getCategory(props);
   const catPath = category.path.replace(/(\/$)/, '').replace(/^\//, '');
-  const cmsContent = await getCategoryContent('category', catPath);
 
   return (
     <>
       <Stream
-        value={Streamable.from(() => getCategoryContent('category', catPath))}
+        value={Streamable.from(() => getCategoryContent('category', catPath, locale))}
       >
         {(cmsContent) => (
           <>

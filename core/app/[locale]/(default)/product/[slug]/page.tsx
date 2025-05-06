@@ -265,7 +265,7 @@ export default async function Product(props: Props) {
       />
 
       <Stream
-        value={Streamable.from(() => getCategoryContent('product', product.sku))}
+        value={Streamable.from(() => getCategoryContent('product', product.sku, locale))}
       >
         {(cmsContent) => (
           <div className="mx-auto w-full max-w-screen-2xl">
