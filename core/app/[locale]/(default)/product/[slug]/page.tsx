@@ -341,7 +341,7 @@ export default async function Product({ params, searchParams }: Props) {
       </ProductAnalyticsProvider>
 
       <Stream
-        value={Streamable.from(() => getCategoryContent('product', baseProduct.sku))}
+        value={Streamable.from(() => getCategoryContent('product', baseProduct.sku, locale))}
       >
         {(cmsContent) => (
           <div className="mx-auto w-full max-w-screen-2xl">
