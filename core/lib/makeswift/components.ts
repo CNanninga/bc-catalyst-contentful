@@ -14,3 +14,7 @@ import './components/site-header/register';
 import './components/site-theme/register';
 import './components/slideshow/register';
 import './components/sticky-sidebar/register';
+
+import '~/components/custom/image-compare-slider/register';
+import '~/components/custom/product-faqs/register';
+import '~/components/custom/team-members/register';
