@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "remoteCache": {
+    "signature": true
+  },
+  "globalDependencies": [
+    ".env.local"
+  ],
+  "tasks": {
+    "topo": {
+      "dependsOn": [
+        "^topo"
+      ]
+    },
+    "build": {
+      "env": ["*"],
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**"
+      ]
+    },
+    "lint": {
+      "env": ["*"],
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "typecheck": {
+      "env": ["*"],
+      "dependsOn": [
+        "topo"
+      ],
+      "outputs": [
+        "node_modules/.cache/tsbuildinfo.json"
+      ]
+    },
+    "dev": {
+      "env": ["*"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
