@@ -26,6 +26,8 @@ import { MakeswiftProvider } from '~/lib/makeswift/provider';
 
 import { getToastNotification } from '../../lib/server-toast';
 
+import ThreeExample from '~/components/custom/three-example';
+
 import '~/lib/makeswift/components';
 
 const RootLayoutMetadataQuery = graphql(
@@ -134,6 +136,7 @@ export default async function RootLayout({ params, children }: Props) {
           </NextIntlClientProvider>
           <VercelComponents />
           <ContainerQueryPolyfill />
+          <ThreeExample />
         </body>
       </html>
     </MakeswiftProvider>
