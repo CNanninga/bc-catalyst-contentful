@@ -1,0 +1,44 @@
+name: Regression Tests
+
+on:
+  deployment_status:
+    states: ['success']
+
+env:
+  VERCEL_PROTECTION_BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.deployment_status.target_url }}
+  cancel-in-progress: true
+
+jobs:
+  unlighthouse-audit:
+    if: ${{ contains(fromJson('["Production – catalyst-canary", "Preview – catalyst-canary"]'), github.event.deployment_status.environment) }}
+    name: Unlighthouse Audit - ${{ matrix.device }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device: [desktop, mobile]
+    concurrency: 
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.deployment_status.target_url }}-${{ matrix.device }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Dependencies
+        run: npm install @unlighthouse/cli puppeteer -g
+
+      - name: Unlighthouse audit on ${{ matrix.device }}
+        run: unlighthouse-ci --site ${{ github.event.deployment_status.target_url }} --${{ matrix.device }} --disable-robots-txt --extra-headers x-vercel-protection-bypass=$VERCEL_PROTECTION_BYPASS,x-vercel-set-bypass-cookie=true
+
+      - name: Upload ${{ matrix.device }} audit
+        if: failure() || success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unlighthouse-${{ matrix.device }}-report
+          path: './.unlighthouse/'
+          include-hidden-files: 'true'
