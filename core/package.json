@@ -4,15 +4,18 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "npm run generate && next dev",
+    "dev": "npm run generate && catalyst dev",
+    "link": "catalyst link",
     "generate": "dotenv -e .env.local -- node ./scripts/generate.cjs",
     "build": "npm run generate && next build",
     "build:analyze": "ANALYZE=true npm run build",
-    "start": "next start",
+    "start": "catalyst start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "deploy": "catalyst deploy"
   },
   "dependencies": {
+    "@bigcommerce/catalyst": "1.0.0-alpha.0",
     "@bigcommerce/catalyst-client": "workspace:^",
     "@conform-to/react": "^1.6.1",
     "@conform-to/zod": "^1.6.1",
@@ -20,6 +23,7 @@
     "@contentful/rich-text-types": "^16.8.5",
     "@icons-pack/react-simple-icons": "^11.2.0",
     "@makeswift/runtime": "^0.25.0",
+    "@opennextjs/cloudflare": "^1.9.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.14",

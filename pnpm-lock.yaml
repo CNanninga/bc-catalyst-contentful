@@ -35,6 +35,9 @@ importers:
 
   core:
     dependencies:
+      '@bigcommerce/catalyst':
+        specifier: 1.0.0-alpha.0
+        version: 1.0.0-alpha.0(@opennextjs/cloudflare@1.9.0(encoding@0.1.13)(wrangler@4.31.0))(encoding@0.1.13)
       '@bigcommerce/catalyst-client':
         specifier: workspace:^
         version: link:../packages/client
@@ -56,6 +59,9 @@ importers:
       '@makeswift/runtime':
         specifier: ^0.25.0
         version: 0.25.0(@types/react-dom@19.1.6(@types/react@19.1.6))(@types/react@19.1.6)(next@15.5.1-canary.4(@babel/core@7.27.4)(@playwright/test@1.52.0)(babel-plugin-macros@3.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@opennextjs/cloudflare':
+        specifier: ^1.9.0
+        version: 1.9.0(encoding@0.1.13)(wrangler@4.31.0)
       '@radix-ui/react-accordion':
         specifier: ^1.2.11
         version: 1.2.11(@types/react-dom@19.1.6(@types/react@19.1.6))(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1094,6 +1100,13 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@bigcommerce/catalyst@1.0.0-alpha.0':
+    resolution: {integrity: sha512-8s6TNWQGEsN5EUJU4OBYpaP6QgzjffYHy8TByW75sNRdxNkyDSqf4VAirj4eJ9P7HBiEAwHDx1Y1L/mzwM/XpA==}
+    engines: {node: ^20.0.0 || ^22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@opennextjs/cloudflare': ^1.8.0
 
   '@bigcommerce/eslint-config@2.11.0':
     resolution: {integrity: sha512-r2fWFFmb4UTUEIgI50iKqrNg9Y9xvFepWhOYP/wXNofAyb/+MiH8pHb7glxZFphEtTWnb5hI7K9gCvCrXPAOcQ==}
@@ -2623,11 +2636,21 @@ packages:
     resolution: {integrity: sha512-s50dmKrgQ62GliffoI/hGGQVb3q/7ZN5VRa4jJw0ZsEGLfk25XuAulO/ySCYeE7/A23KoAYuhafnKr/h+vxOeQ==}
     hasBin: true
 
+  '@opennextjs/aws@3.7.7':
+    resolution: {integrity: sha512-rkBpNfBsq3XvbBh+VcNI9dvs0UkuuJH5I7SvVdPx12LudiErShL/9RoA7iF9tpkfRizcwGRIhsedrHKmcs9kqw==}
+    hasBin: true
+
   '@opennextjs/cloudflare@1.6.5':
     resolution: {integrity: sha512-eOoRrslJW/cK5RotFHA8Se/KlKyynOFA29i9jor4cp1JF/AkGSwatUaBNK0oLvqM4nDCq3Bo/HlYRbyc/R/T0w==}
     hasBin: true
     peerDependencies:
       wrangler: ^4.24.4
+
+  '@opennextjs/cloudflare@1.9.0':
+    resolution: {integrity: sha512-Dao5tW2g0Q/n9BLoDCoK0qiEY4bqxevsjb4OhtEfQpc7Pt/R9TZCWXKZ8+GTr1ZkvsFcMJeD1qsciNFTkb60kg==}
+    hasBin: true
+    peerDependencies:
+      wrangler: ^4.38.0
 
   '@panva/hkdf@1.2.1':
     resolution: {integrity: sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==}
@@ -9815,7 +9838,7 @@ snapshots:
       '@aws-crypto/sha256-js': 3.0.0
       '@aws-crypto/supports-web-crypto': 3.0.0
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.398.0
+      '@aws-sdk/types': 3.862.0
       '@aws-sdk/util-locate-window': 3.804.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
@@ -9833,7 +9856,7 @@ snapshots:
   '@aws-crypto/sha256-js@3.0.0':
     dependencies:
       '@aws-crypto/util': 3.0.0
-      '@aws-sdk/types': 3.398.0
+      '@aws-sdk/types': 3.862.0
       tslib: 1.14.1
 
   '@aws-crypto/sha256-js@5.2.0':
@@ -9852,7 +9875,7 @@ snapshots:
 
   '@aws-crypto/util@3.0.0':
     dependencies:
-      '@aws-sdk/types': 3.398.0
+      '@aws-sdk/types': 3.862.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
 
@@ -10933,6 +10956,21 @@ snapshots:
   '@bcoe/v8-coverage@0.2.3': {}
 
   '@bcoe/v8-coverage@1.0.2': {}
+
+  '@bigcommerce/catalyst@1.0.0-alpha.0(@opennextjs/cloudflare@1.9.0(encoding@0.1.13)(wrangler@4.31.0))(encoding@0.1.13)':
+    dependencies:
+      '@opennextjs/cloudflare': 1.9.0(encoding@0.1.13)(wrangler@4.31.0)
+      '@segment/analytics-node': 2.2.1(encoding@0.1.13)
+      adm-zip: 0.5.16
+      commander: 14.0.0
+      conf: 13.1.0
+      consola: 3.4.2
+      dotenv: 16.5.0
+      execa: 9.6.0
+      yocto-spinner: 1.0.0
+      zod: 4.0.5
+    transitivePeerDependencies:
+      - encoding
 
   '@bigcommerce/eslint-config@2.11.0(@types/eslint@9.6.1)(eslint@8.57.1)(jest@29.7.0(@types/node@22.15.30)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@swc/core@1.11.31)(@types/node@22.15.30)(typescript@5.8.3)))(typescript@5.8.3)':
     dependencies:
@@ -12573,10 +12611,48 @@ snapshots:
       - aws-crt
       - supports-color
 
+  '@opennextjs/aws@3.7.7':
+    dependencies:
+      '@ast-grep/napi': 0.35.0
+      '@aws-sdk/client-cloudfront': 3.398.0
+      '@aws-sdk/client-dynamodb': 3.868.0
+      '@aws-sdk/client-lambda': 3.865.0
+      '@aws-sdk/client-s3': 3.864.0
+      '@aws-sdk/client-sqs': 3.864.0
+      '@node-minify/core': 8.0.6
+      '@node-minify/terser': 8.0.6
+      '@tsconfig/node18': 1.0.3
+      aws4fetch: 1.0.20
+      chalk: 5.4.1
+      cookie: 1.0.2
+      esbuild: 0.25.4
+      express: 5.0.1
+      path-to-regexp: 6.3.0
+      urlpattern-polyfill: 10.0.0
+      yaml: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
+      - supports-color
+
   '@opennextjs/cloudflare@1.6.5(encoding@0.1.13)(wrangler@4.31.0)':
     dependencies:
       '@dotenvx/dotenvx': 1.31.0
       '@opennextjs/aws': 3.7.4
+      cloudflare: 4.5.0(encoding@0.1.13)
+      enquirer: 2.4.1
+      glob: 11.0.3
+      ts-tqdm: 0.8.6
+      wrangler: 4.31.0
+      yargs: 18.0.0
+    transitivePeerDependencies:
+      - aws-crt
+      - encoding
+      - supports-color
+
+  '@opennextjs/cloudflare@1.9.0(encoding@0.1.13)(wrangler@4.31.0)':
+    dependencies:
+      '@dotenvx/dotenvx': 1.31.0
+      '@opennextjs/aws': 3.7.7
       cloudflare: 4.5.0(encoding@0.1.13)
       enquirer: 2.4.1
       glob: 11.0.3
