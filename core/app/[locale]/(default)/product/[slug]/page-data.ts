@@ -183,6 +183,7 @@ const ProductQuery = graphql(
         product(entityId: $entityId) {
           entityId
           name
+          sku
           description
           path
           brand {
