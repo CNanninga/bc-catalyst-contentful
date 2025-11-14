@@ -78,6 +78,7 @@ const config = {
         },
       },
       colors: {
+        subcategoryListHeading: 'var(--subcategory-list-heading)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           highlight: 'color-mix(in oklab, hsl(var(--primary)), white 75%)',
