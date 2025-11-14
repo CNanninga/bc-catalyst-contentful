@@ -25,6 +25,9 @@ import { fetchFacetedSearch } from '../../fetch-faceted-search';
 import { CategoryViewed } from './_components/category-viewed';
 import { getCategoryPageData } from './page-data';
 
+import { getCategoryContent } from '~/lib/contentful/client/queries/get-category-content';
+import CmsContent from '~/components/custom/contenful/cms-content';
+
 const getCachedCategory = cache((categoryId: number) => {
   return {
     category: categoryId,
@@ -245,12 +248,19 @@ export default async function Category(props: Props) {
     categoryId: Number(slug),
   }, customerAccessToken);
 
+  const catPath = category.path.replace(/(\/$)/, '').replace(/^\//, '');
+  const streamableCmsContent = Streamable.from(async () => {
+    return await getCategoryContent('category', catPath, locale);
+  });
+
   return (
     <>
       <Slot
         label={`${category.name} top content`}
         snapshotId={`category-${categoryId}-top-content`}
       />
+      
+      <CmsContent blocks={streamableCmsContent} />
 
       {(subcategories.length > 0) ? (
 
