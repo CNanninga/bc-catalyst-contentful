@@ -10,6 +10,8 @@ import { createCompareLoader } from '@/vibes/soul/primitives/compare-drawer/load
 import { ProductsListSection } from '@/vibes/soul/sections/products-list-section';
 import { getFilterParsers } from '@/vibes/soul/sections/products-list-section/filter-parsers';
 import { getSessionCustomerAccessToken } from '~/auth';
+import { getSubcategories } from '~/components/subcategory-list/component-data';
+import { SubcategoryList } from '~/components/subcategory-list';
 import { facetsTransformer } from '~/data-transformers/facets-transformer';
 import { pageInfoTransformer } from '~/data-transformers/page-info-transformer';
 import { pricesTransformer } from '~/data-transformers/prices-transformer';
@@ -239,12 +241,26 @@ export default async function Category(props: Props) {
     }));
   });
 
+  const subcategories = await getSubcategories({
+    categoryId: Number(slug),
+  }, customerAccessToken);
+
   return (
     <>
       <Slot
         label={`${category.name} top content`}
         snapshotId={`category-${categoryId}-top-content`}
       />
+
+      {(subcategories.length > 0) ? (
+
+      <SubcategoryList
+        subcategories={subcategories}
+        title={category.name}
+      />
+
+      ) : (
+
       <ProductsListSection
         breadcrumbs={breadcrumbs}
         compareLabel={t('Compare.compare')}
@@ -279,6 +295,9 @@ export default async function Category(props: Props) {
         title={category.name}
         totalCount={streamableTotalCount}
       />
+
+      )}
+
       <Slot
         label={`${category.name} bottom content`}
         snapshotId={`category-${categoryId}-bottom-content`}
