@@ -1,0 +1,166 @@
+import { getSiteVersion } from '@makeswift/runtime/next/server';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { clsx } from 'clsx';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { cache, PropsWithChildren } from 'react';
+
+import '../../globals.css';
+
+import { fonts } from '~/app/fonts';
+import { CookieNotifications } from '~/app/notifications';
+import { Providers } from '~/app/providers';
+import { client } from '~/client';
+import { graphql } from '~/client/graphql';
+import { revalidate } from '~/client/revalidate-target';
+import { WebAnalyticsFragment } from '~/components/analytics/fragment';
+import { AnalyticsProvider } from '~/components/analytics/provider';
+import { ConsentManager } from '~/components/consent-manager';
+import { ScriptsFragment } from '~/components/consent-manager/scripts-fragment';
+import { ContainerQueryPolyfill } from '~/components/polyfills/container-query';
+import { scriptsTransformer } from '~/data-transformers/scripts-transformer';
+import { routing } from '~/i18n/routing';
+import { SiteTheme } from '~/lib/makeswift/components/site-theme';
+import { MakeswiftProvider } from '~/lib/makeswift/provider';
+import { getToastNotification } from '~/lib/server-toast';
+
+import '~/lib/makeswift/components';
+
+const RootLayoutMetadataQuery = graphql(
+  `
+    query RootLayoutMetadataQuery {
+      site {
+        settings {
+          privacy {
+            cookieConsentEnabled
+          }
+          storeName
+          seo {
+            pageTitle
+            metaDescription
+            metaKeywords
+          }
+          ...WebAnalyticsFragment
+        }
+        content {
+          ...ScriptsFragment
+        }
+      }
+      channel {
+        entityId
+      }
+    }
+  `,
+  [WebAnalyticsFragment, ScriptsFragment],
+);
+
+const fetchRootLayoutMetadata = cache(async () => {
+  return await client.fetch({
+    document: RootLayoutMetadataQuery,
+    fetchOptions: { next: { revalidate } },
+  });
+});
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await fetchRootLayoutMetadata();
+
+  const storeName = data.site.settings?.storeName ?? '';
+
+  const { pageTitle, metaDescription, metaKeywords } = data.site.settings?.seo || {};
+
+  return {
+    title: {
+      template: `%s - ${storeName}`,
+      default: pageTitle || storeName,
+    },
+    icons: {
+      icon: '/favicon.ico', // app/favicon.ico/route.ts
+    },
+    description: metaDescription,
+    keywords: metaKeywords ? metaKeywords.split(',') : null,
+    other: {
+      platform: 'bigcommerce.catalyst',
+      build_sha: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? '',
+      store_hash: process.env.BIGCOMMERCE_STORE_HASH ?? '',
+    },
+  };
+}
+
+const VercelComponents = () => {
+  if (process.env.VERCEL !== '1') {
+    return null;
+  }
+
+  return (
+    <>
+      {process.env.DISABLE_VERCEL_ANALYTICS !== 'true' && <Analytics />}
+      {process.env.DISABLE_VERCEL_SPEED_INSIGHTS !== 'true' && <SpeedInsights />}
+    </>
+  );
+};
+
+interface Props extends PropsWithChildren {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function RootLayout({ params, children }: Props) {
+  const { locale } = await params;
+
+  const rootData = await fetchRootLayoutMetadata();
+  const toastNotificationCookieData = await getToastNotification();
+  const siteVersion = await getSiteVersion();
+
+  if (!routing.locales.includes(locale)) {
+    notFound();
+  }
+
+  // need to call this method everywhere where static rendering is enabled
+  // https://next-intl-docs.vercel.app/docs/getting-started/app-router#add-setRequestLocale-to-all-layouts-and-pages
+  setRequestLocale(locale);
+
+  const scripts = scriptsTransformer(rootData.data.site.content.scripts);
+  const isCookieConsentEnabled =
+    rootData.data.site.settings?.privacy?.cookieConsentEnabled ?? false;
+
+  return (
+    <MakeswiftProvider siteVersion={siteVersion}>
+      <html className={clsx(fonts.map((f) => f.variable))} lang={locale}>
+        <head>
+          <SiteTheme />
+        </head>
+        <body className="flex min-h-screen flex-col">
+          <NextIntlClientProvider>
+            <ConsentManager isCookieConsentEnabled={isCookieConsentEnabled} scripts={scripts}>
+              <NuqsAdapter>
+                <AnalyticsProvider
+                  channelId={rootData.data.channel.entityId}
+                  isCookieConsentEnabled={isCookieConsentEnabled}
+                  settings={rootData.data.site.settings}
+                >
+                  <Providers>
+                    {toastNotificationCookieData && (
+                      <CookieNotifications {...toastNotificationCookieData} />
+                    )}
+                    {children}
+                  </Providers>
+                </AnalyticsProvider>
+              </NuqsAdapter>
+            </ConsentManager>
+          </NextIntlClientProvider>
+          <VercelComponents />
+          <ContainerQueryPolyfill />
+        </body>
+      </html>
+    </MakeswiftProvider>
+  );
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export const fetchCache = 'default-cache';
