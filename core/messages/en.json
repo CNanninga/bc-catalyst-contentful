@@ -574,6 +574,10 @@
           "ratingTooLarge": "Rating must be at most 5"
         }
       }
+    },
+    "FAQ": {
+      "heading": "Frequently Asked Questions",
+      "loadMore": "Load more"
     }
   },
   "WebPages": {
