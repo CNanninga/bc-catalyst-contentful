@@ -1,0 +1,57 @@
+import { clsx } from 'clsx';
+
+import { DynamicForm, DynamicFormAction } from '@/vibes/soul/form/dynamic-form';
+import {
+  Field,
+  FieldGroup,
+  FormErrorTranslationMap,
+  PasswordComplexitySettings,
+} from '@/vibes/soul/form/dynamic-form/schema';
+import { SectionLayout } from '@/vibes/soul/sections/section-layout';
+
+interface Props<F extends Field> {
+  title?: string;
+  subtitle?: string;
+  action: DynamicFormAction<F>;
+  fields: Array<F | FieldGroup<F>>;
+  submitLabel?: string;
+  className?: string;
+  passwordComplexity?: PasswordComplexitySettings | null;
+  errorTranslations?: FormErrorTranslationMap;
+  recaptchaSiteKey?: string;
+}
+
+export function DynamicFormSection<F extends Field>({
+  className,
+  title,
+  subtitle,
+  fields,
+  submitLabel,
+  action,
+  passwordComplexity,
+  errorTranslations,
+  recaptchaSiteKey,
+}: Props<F>) {
+  return (
+    <SectionLayout className={clsx('mx-auto w-full max-w-4xl', className)} containerSize="lg">
+      {title != null && title !== '' && (
+        <header className="pb-8 @2xl:pb-12 @4xl:pb-16">
+          <h1 className="mb-5 font-heading text-4xl font-medium leading-none @xl:text-5xl">
+            {title}
+          </h1>
+          {subtitle != null && subtitle !== '' && (
+            <p className="mb-10 text-base font-light leading-none @xl:text-lg">{subtitle}</p>
+          )}
+        </header>
+      )}
+      <DynamicForm
+        action={action}
+        errorTranslations={errorTranslations}
+        fields={fields}
+        passwordComplexity={passwordComplexity}
+        recaptchaSiteKey={recaptchaSiteKey}
+        submitLabel={submitLabel}
+      />
+    </SectionLayout>
+  );
+}
