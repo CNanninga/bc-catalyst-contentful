@@ -138,6 +138,11 @@ export default async function Category(props: Props) {
 
   const taxDisplay = settings?.tax?.plp;
 
+  const categoryDefaultSort =
+    category.defaultProductSort && category.defaultProductSort !== 'DEFAULT'
+      ? category.defaultProductSort.toLowerCase()
+      : 'featured';
+
   const streamableFacetedSearch = Streamable.from(async () => {
     const searchParams = await props.searchParams;
     const currencyCode = await getPreferredCurrencyCode();
@@ -147,12 +152,14 @@ export default async function Category(props: Props) {
       customerAccessToken,
     );
     const parsedSearchParams = loadSearchParams?.(searchParams) ?? {};
+    const sort = typeof searchParams.sort === 'string' ? searchParams.sort : categoryDefaultSort;
 
     const search = await fetchFacetedSearch(
       {
         ...searchParams,
         ...parsedSearchParams,
         category: categoryId,
+        sort,
       },
       currencyCode,
       customerAccessToken,
@@ -305,7 +312,7 @@ export default async function Category(props: Props) {
         resetFiltersLabel={t('FacetedSearch.resetFilters')}
         showCompare={productComparisonsEnabled}
         showRating={showRating}
-        sortDefaultValue="featured"
+        sortDefaultValue={categoryDefaultSort}
         sortLabel={t('SortBy.sortBy')}
         sortOptions={[
           { value: 'featured', label: t('SortBy.featuredItems') },

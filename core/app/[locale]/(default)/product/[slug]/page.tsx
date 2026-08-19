@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 
 import { Stream, Streamable } from '@/vibes/soul/lib/streamable';
 import { FeaturedProductCarousel } from '@/vibes/soul/sections/featured-product-carousel';
+import { ProductVideos } from '@/vibes/soul/sections/product-detail/product-videos';
 import { auth, getSessionCustomerAccessToken } from '~/auth';
 import { ProductFaqs } from '~/components/custom/product-faqs';
 import { ProductFaqsSkeleton } from '~/components/custom/product-faqs/faqs';
@@ -206,6 +207,18 @@ export default async function Product({ params, searchParams }: Props) {
         : images,
       pageInfo: product.images.pageInfo,
     };
+  });
+
+  // Product videos render in their own section below the primary content, so
+  // they're streamed independently of the gallery images. The Storefront
+  // GraphQL API returns each video as { title, url } (a YouTube watch URL).
+  const streamableVideos = Streamable.from(async () => {
+    const product = await streamableProduct;
+
+    return removeEdgesAndNodes(product.videos).map((video) => ({
+      url: video.url,
+      title: video.title,
+    }));
   });
 
   const streameableCtaLabel = Streamable.from(async () => {
@@ -538,6 +551,11 @@ export default async function Product({ params, searchParams }: Props) {
     };
   });
 
+  const promotionCallouts = removeEdgesAndNodes(baseProduct.featuredPromotions).map((p) => ({
+    id: p.entityId.toString(),
+    text: p.text,
+  }));
+
   const streamableUser = Streamable.from(async () => {
     const session = await auth();
     const firstName = session?.user?.firstName ?? '';
@@ -603,6 +621,7 @@ export default async function Product({ params, searchParams }: Props) {
             backorderDisplayData: streamableBackorderDisplayData,
           }}
           productId={baseProduct.entityId}
+          promotionCallouts={promotionCallouts}
           quantityLabel={t('ProductDetails.quantity')}
           recaptchaSiteKey={recaptchaSiteKey}
           reviewFormAction={submitReview}
@@ -610,6 +629,10 @@ export default async function Product({ params, searchParams }: Props) {
           user={streamableUser}
         />
       </ProductAnalyticsProvider>
+      
+      <Stream fallback={null} value={streamableVideos}>
+        {(videos) => videos.length > 0 && <ProductVideos videos={videos} />}
+      </Stream>
 
       <div className="mx-auto w-full max-w-screen-2xl">
         <CmsContent blocks={streamableCmsContent} />

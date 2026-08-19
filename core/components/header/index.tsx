@@ -16,6 +16,7 @@ import { SiteHeader as HeaderSection } from '~/lib/makeswift/components/site-hea
 
 import { search } from './_actions/search';
 import { switchCurrency } from './_actions/switch-currency';
+import { switchLocale } from './_actions/switch-locale';
 import { CurrencyCode, HeaderFragment, HeaderLinksFragment } from './fragment';
 
 import { removeEdgesAndNodes } from '@bigcommerce/catalyst-client';
@@ -190,6 +191,7 @@ export const Header = async () => {
         cartCount: streamableCartCount,
         activeLocaleId: locale,
         locales,
+        localeAction: switchLocale,
         currencies,
         activeCurrencyId: streamableActiveCurrencyId,
         currencyAction: switchCurrency,
