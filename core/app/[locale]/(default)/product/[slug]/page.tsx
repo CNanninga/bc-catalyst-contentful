@@ -10,6 +10,7 @@ import { FeaturedProductCarousel } from '@/vibes/soul/sections/featured-product-
 import { auth, getSessionCustomerAccessToken } from '~/auth';
 import { ProductFaqs } from '~/components/custom/product-faqs';
 import { ProductFaqsSkeleton } from '~/components/custom/product-faqs/faqs';
+import { rewriteWysiwygContentUrls } from '~/data-transformers/html-content-transformer';
 import { pricesTransformer } from '~/data-transformers/prices-transformer';
 import { productCardTransformer } from '~/data-transformers/product-card-transformer';
 import { productOptionsTransformer } from '~/data-transformers/product-options-transformer';
@@ -77,6 +78,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Product({ params, searchParams }: Props) {
   const { locale, slug } = await params;
+  const options = await searchParams;
+
+  const optionValueIds = Object.keys(options)
+    .map((option) => ({
+      optionEntityId: Number(option),
+      valueEntityId: Number(options[option]),
+    }))
+    .filter(
+      (option) => !Number.isNaN(option.optionEntityId) && !Number.isNaN(option.valueEntityId),
+    );
+
   const customerAccessToken = await getSessionCustomerAccessToken();
   const detachedWishlistFormId = 'product-add-to-wishlist-form';
 
@@ -94,23 +106,13 @@ export default async function Product({ params, searchParams }: Props) {
 
   const reviewsEnabled = Boolean(settings?.reviews.enabled && !settings.display.showProductRating);
   const showRating = Boolean(settings?.reviews.enabled && settings.display.showProductRating);
+  const taxDisplay = settings?.tax?.pdp;
 
   if (!baseProduct) {
     return notFound();
   }
 
   const streamableProduct = Streamable.from(async () => {
-    const options = await searchParams;
-
-    const optionValueIds = Object.keys(options)
-      .map((option) => ({
-        optionEntityId: Number(option),
-        valueEntityId: Number(options[option]),
-      }))
-      .filter(
-        (option) => !Number.isNaN(option.optionEntityId) && !Number.isNaN(option.valueEntityId),
-      );
-
     const variables = {
       entityId: Number(productId),
       optionValueIds,
@@ -131,6 +133,8 @@ export default async function Product({ params, searchParams }: Props) {
   const streamableProductInventory = Streamable.from(async () => {
     const variables = {
       entityId: Number(productId),
+      optionValueIds,
+      useDefaultOptionSelections: true,
     };
 
     const product = await getStreamableProductInventory(variables, customerAccessToken);
@@ -164,17 +168,6 @@ export default async function Product({ params, searchParams }: Props) {
   });
 
   const streamableProductPricingAndRelatedProducts = Streamable.from(async () => {
-    const options = await searchParams;
-
-    const optionValueIds = Object.keys(options)
-      .map((option) => ({
-        optionEntityId: Number(option),
-        valueEntityId: Number(options[option]),
-      }))
-      .filter(
-        (option) => !Number.isNaN(option.optionEntityId) && !Number.isNaN(option.valueEntityId),
-      );
-
     const currencyCode = await getPreferredCurrencyCode();
 
     const variables = {
@@ -194,7 +187,7 @@ export default async function Product({ params, searchParams }: Props) {
       return null;
     }
 
-    return pricesTransformer(product.prices, format) ?? null;
+    return pricesTransformer(product, format, taxDisplay) ?? null;
   });
 
   const streamableImages = Streamable.from(async () => {
@@ -492,7 +485,12 @@ export default async function Product({ params, searchParams }: Props) {
             {
               title: t('ProductDetails.Accordions.warranty'),
               content: (
-                <div className="prose" dangerouslySetInnerHTML={{ __html: product.warranty }} />
+                <div
+                  className="prose"
+                  dangerouslySetInnerHTML={{
+                    __html: rewriteWysiwygContentUrls(product.warranty),
+                  }}
+                />
               ),
             },
           ]
@@ -509,7 +507,7 @@ export default async function Product({ params, searchParams }: Props) {
 
     const relatedProducts = removeEdgesAndNodes(product.relatedProducts);
 
-    return productCardTransformer(relatedProducts, format);
+    return productCardTransformer(relatedProducts, format, undefined, undefined, taxDisplay);
   });
 
   const streamableMinQuantity = Streamable.from(async () => {
@@ -535,8 +533,8 @@ export default async function Product({ params, searchParams }: Props) {
       name: extendedProduct.name,
       sku: extendedProduct.sku,
       brand: extendedProduct.brand?.name ?? '',
-      price: pricingProduct?.prices?.price.value ?? 0,
-      currency: pricingProduct?.prices?.price.currencyCode ?? '',
+      price: pricingProduct?.pricesIncludingTax?.price.value ?? 0,
+      currency: pricingProduct?.pricesIncludingTax?.price.currencyCode ?? '',
     };
   });
 
@@ -583,7 +581,13 @@ export default async function Product({ params, searchParams }: Props) {
           product={{
             id: baseProduct.entityId.toString(),
             title: baseProduct.name,
-            description: <div dangerouslySetInnerHTML={{ __html: baseProduct.description }} />,
+            description: (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: rewriteWysiwygContentUrls(baseProduct.description),
+                }}
+              />
+            ),
             href: baseProduct.path,
             images: streamableImages,
             price: streamablePrices,
@@ -647,10 +651,20 @@ export default async function Product({ params, searchParams }: Props) {
         {([extendedProduct, pricingProduct]) => (
           <>
             <ProductSchema
-              product={{ ...extendedProduct, prices: pricingProduct?.prices ?? null }}
+              product={{
+                ...extendedProduct,
+                pricesIncludingTax: pricingProduct?.pricesIncludingTax ?? null,
+                pricesExcludingTax: pricingProduct?.pricesExcludingTax ?? null,
+              }}
+              taxDisplay={taxDisplay}
             />
             <ProductViewed
-              product={{ ...extendedProduct, prices: pricingProduct?.prices ?? null }}
+              product={{
+                ...extendedProduct,
+                pricesIncludingTax: pricingProduct?.pricesIncludingTax ?? null,
+                pricesExcludingTax: pricingProduct?.pricesExcludingTax ?? null,
+              }}
+              taxDisplay={taxDisplay}
             />
           </>
         )}
