@@ -2,6 +2,10 @@
 
 This project is a form of BigCommerce Catalyst with custom additions for Contentful, product FAQs, custom Makeswift components, subcategory listing, and web pages in nav. See `README.md` for the customization summary and `README-Catalyst.md` for upstream context.
 
+## Original AGENTS.md
+
+See AGENTS-Catalyst.md for the original Catalyst version.
+
 ## Toolchain
 
 - Node (`.nvmrc`), `pnpm` via Corepack (`corepack enable pnpm`).
@@ -69,7 +73,7 @@ The codebase talks to **two** GraphQL APIs and treats them symmetrically:
 - BigCommerce Storefront API — client at `core/client/`, schema `core/bigcommerce.graphql`, `gql.tada` types in `core/bigcommerce-graphql.d.ts`.
 - Contentful Content API — client at `core/lib/contentful/client/` (`contentfulFetch`, `contentfulGraphql`), schema `core/contentful.graphql`, types in `core/contentful-graphql.d.ts`. Queries colocated under `core/lib/contentful/client/queries/`.
 
-Both are configured in `core/tsconfig.json` under `@0no-co/graphqlsp` so editor tooling validates queries against the right schema. When adding queries, place them next to existing ones so `graphql.config.json` and the generate script can find them.
+Both are configured in `core/tsconfig.json` under `@0no-co/graphqlsp` so editor tooling validates queries against the right schema. When adding queries, place them next to existing ones.
 
 ### Next.js App Router structure
 

@@ -1,3 +1,0 @@
-# @bigcommerce/catalyst
-
-CLI
