@@ -5,4 +5,4 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
-  workerd: set this to true or false
+  workerd: true
