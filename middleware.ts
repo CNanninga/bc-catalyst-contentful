@@ -8,7 +8,7 @@ import { withMakeswift } from './proxies/with-makeswift';
 import { withRoutes } from './proxies/with-routes';
 import { withUcpProxy } from './proxies/with-ucp-proxy';
 
-export const proxy = composeProxies(
+export const middleware = composeProxies(
   withUcpProxy,
   withAuth,
   withMakeswift,
@@ -20,6 +20,7 @@ export const proxy = composeProxies(
 );
 
 export const config = {
+  runtime: 'experimental-edge',
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
