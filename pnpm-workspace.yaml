@@ -1,23 +1,7 @@
-packages:
-  - core
-  - packages/*
-
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
-  - '@vercel/speed-insights'
-  - esbuild
-  - msw
-  - protobufjs
-  - puppeteer
-  - sharp
-  - workerd
-
-publicHoistPattern:
-  - '@bigcommerce/eslint-*'
-  - '@bigcommerce/eslint-*'
-  - '@next/eslint-*'
-  - '@stylistic/eslint-*'
-  - '@typescript-eslint/*'
-  - eslint-config-*
-  - eslint-plugin-*
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true
