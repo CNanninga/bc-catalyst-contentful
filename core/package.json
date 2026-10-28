@@ -1,10 +1,10 @@
 {
   "name": "@bigcommerce/catalyst-makeswift",
   "description": "BigCommerce Catalyst is a Next.js starter kit for building headless BigCommerce storefronts.",
-  "version": "1.10.0",
+  "version": "1.13.1",
   "catalyst": {
-    "version": "1.10.0",
-    "ref": "@bigcommerce/catalyst-makeswift@1.10.0"
+    "version": "1.13.1",
+    "ref": "@bigcommerce/catalyst-makeswift@1.13.1"
   },
   "private": true,
   "engines": {
@@ -16,6 +16,7 @@
     "build": "npm run generate && next build",
     "build:analyze": "ANALYZE=true npm run build",
     "start": "next start",
+    "test": "vitest run",
     "prelint": "next typegen",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit"
@@ -30,7 +31,7 @@
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "@contentful/rich-text-types": "^16.8.5",
     "@icons-pack/react-simple-icons": "^11.2.0",
-    "@makeswift/runtime": "0.28.5",
+    "@makeswift/runtime": "0.29.2",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/api-logs": "^0.208.0",
     "@opentelemetry/instrumentation": "^0.208.0",
@@ -65,12 +66,13 @@
     "embla-carousel-react": "9.0.0-rc01",
     "gql.tada": "^1.8.10",
     "graphql": "^16.11.0",
+    "isbot": "^5.2.2",
     "jose": "^5.10.0",
     "lite-youtube-embed": "^0.3.4",
     "lodash.debounce": "^4.0.8",
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.474.0",
-    "next": "~16.2.11",
+    "next": "~16.3.4",
     "next-auth": "5.0.0-beta.30",
     "next-intl": "^4.6.1",
     "nuqs": "^2.4.3",
@@ -122,6 +124,7 @@
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "1.0.7",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

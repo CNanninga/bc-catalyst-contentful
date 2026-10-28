@@ -1,6 +1,9 @@
 // @ts-check
+const clientPackage = require('@bigcommerce/catalyst-client/package.json');
 const { generateSchema, generateOutput } = require('@gql.tada/cli-utils');
 const { join } = require('path');
+
+const corePackage = require('../package.json');
 
 const graphqlApiDomain = process.env.BIGCOMMERCE_GRAPHQL_API_DOMAIN ?? 'mybigcommerce.com';
 
@@ -43,6 +46,12 @@ const getEndpoint = () => {
   return `https://store-${storeHash}-${channelId}.${graphqlApiDomain}/graphql`;
 };
 
+const getUserAgent = () => {
+  const catalystVersion = corePackage.catalyst?.version ?? corePackage.version;
+
+  return `${clientPackage.name}/${clientPackage.version} (schema-generation; node ${process.version}) ${corePackage.name}/${catalystVersion}`;
+}
+
 const getContentfulEndpoint = () => {
   const spaceId = process.env.CONTENTFUL_SPACE_ID;
   return `https://graphql.contentful.com/content/v1/spaces/${spaceId ?? ''}`;
@@ -57,14 +66,14 @@ const generate = async () => {
   try {
     await generateSchema({
       input: getEndpoint(),
-      headers: { Authorization: `Bearer ${getToken()}` },
+      headers: { Authorization: `Bearer ${getToken()}`, 'User-Agent': getUserAgent() },
       output: join(__dirname, '../bigcommerce.graphql'),
       tsconfig: undefined,
     });
 
     await generateSchema({
       input: getContentfulEndpoint(),
-      headers: { Authorization: `Bearer ${getContentfulToken()}` },
+      headers: { Authorization: `Bearer ${getContentfulToken()}`, 'User-Agent': getUserAgent() },
       output: join(__dirname, '../contentful.graphql'),
       tsconfig: undefined,
     });

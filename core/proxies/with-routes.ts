@@ -4,11 +4,18 @@ import { z } from 'zod';
 import { auth } from '~/auth';
 import { client } from '~/client';
 import { graphql } from '~/client/graphql';
-import { revalidate } from '~/client/revalidate-target';
-import { prefixes } from '~/i18n/locales';
-import { getVisitIdCookie, getVisitorIdCookie } from '~/lib/analytics/bigcommerce';
+import {
+  getProductViewsCookie,
+  getVisitIdCookie,
+  getVisitorIdCookie,
+  setProductViewsCookie,
+} from '~/lib/analytics/bigcommerce';
 import { sendProductViewedEvent } from '~/lib/analytics/bigcommerce/data-events';
+import { addProductView } from '~/lib/analytics/bigcommerce/product-views';
+import { isAnalyticsDisabled } from '~/lib/analytics/is-analytics-disabled';
+import { isInteractiveRequest } from '~/lib/analytics/is-interactive-request';
 import { kvKey, STORE_STATUS_KEY } from '~/lib/kv/keys';
+import { getRedirectSearch, splitRouteLookupSearch } from '~/lib/routes/route-lookup-search';
 
 import { kv } from '../lib/kv';
 
@@ -71,7 +78,8 @@ const getRoute = async (path: string, channelId?: string, customerAccessToken?: 
     document: GetRouteQuery,
     variables: { path },
     customerAccessToken,
-    fetchOptions: customerAccessToken ? { cache: 'no-store' } : { next: { revalidate } },
+    // Proxy fetches aren't Data-Cached (KV is the cache), and no-store forwards the shopper IP.
+    fetchOptions: { cache: 'no-store' },
     channelId,
   });
 
@@ -93,7 +101,7 @@ const getRawWebPageContent = async (id: string, customerAccessToken?: string) =>
   const response = await client.fetch({
     document: getRawWebPageContentQuery,
     variables: { id },
-    fetchOptions: customerAccessToken ? { cache: 'no-store' } : { next: { revalidate } },
+    fetchOptions: { cache: 'no-store' },
     customerAccessToken,
   });
 
@@ -119,7 +127,7 @@ const GetStoreStatusQuery = graphql(`
 const getStoreStatus = async (channelId?: string) => {
   const { data } = await client.fetch({
     document: GetStoreStatusQuery,
-    fetchOptions: { next: { revalidate: 300 } },
+    fetchOptions: { cache: 'no-store' },
     channelId,
   });
 
@@ -218,8 +226,11 @@ const updateStatusCache = async (
   return statusCache;
 };
 
-const clearLocaleFromPath = (path: string, locale: string) => {
-  const prefix = prefixes[locale] ?? `/${locale}`;
+// `prefix` is what `withIntl` matched, via `x-bc-locale-prefix`. Empty means nothing to strip.
+const clearLocaleFromPath = (path: string, prefix: string) => {
+  if (!prefix) {
+    return path;
+  }
 
   if (path === prefix || path === `${prefix}/`) {
     return '/';
@@ -252,12 +263,15 @@ const getRouteInfo = async (
   event: NextFetchEvent,
   customerAccessToken?: string,
 ) => {
-  const locale = request.headers.get('x-bc-locale') ?? '';
+  const localePrefix = request.headers.get('x-bc-locale-prefix') ?? '';
   const channelId = request.headers.get('x-bc-channel-id') ?? '';
 
   try {
-    // For route resolution parity, we need to also include query params, otherwise certain redirects will not work.
-    const pathname = clearLocaleFromPath(request.nextUrl.pathname + request.nextUrl.search, locale);
+    // Redirects can match on query params, so keep them, minus tracking params.
+    const pathname = clearLocaleFromPath(
+      request.nextUrl.pathname + splitRouteLookupSearch(request.nextUrl.search).lookup,
+      localePrefix,
+    );
 
     let [routeCache, statusCache] = await kv.mget<RouteCache | StorefrontStatusCache>(
       kvKey(pathname, channelId),
@@ -313,6 +327,7 @@ export const withRoutes: ProxyFactory = () => {
     // eslint-disable-next-line complexity
     auth(async (req) => {
       const locale = req.headers.get('x-bc-locale') ?? '';
+      const localePrefix = req.headers.get('x-bc-locale-prefix') ?? '';
       const customerAccessToken = req.auth?.user?.customerAccessToken;
 
       const { route, status } = await getRouteInfo(req, event, customerAccessToken);
@@ -333,9 +348,8 @@ export const withRoutes: ProxyFactory = () => {
       };
 
       if (route?.redirect) {
-        // Only carry over query params if the fromPath does not have any, as Bigcommerce 301 redirects support matching by specific query params.
         const fromPathSearchParams = new URL(route.redirect.fromPath, req.url).search;
-        const searchParams = fromPathSearchParams.length > 0 ? '' : req.nextUrl.search;
+        const searchParams = getRedirectSearch(fromPathSearchParams, req.nextUrl.search);
 
         switch (route.redirect.to.__typename) {
           case 'BlogPostRedirect':
@@ -397,7 +411,13 @@ export const withRoutes: ProxyFactory = () => {
           const isPrefetch = req.headers.get('Next-Router-Prefetch') === '1';
           const isRSC = req.headers.get('RSC') === '1';
 
-          if (!isPrefetch && !isRSC) {
+          if (
+            !isAnalyticsDisabled() &&
+            !isPrefetch &&
+            !isRSC &&
+            isInteractiveRequest(req) &&
+            (await isFirstViewInVisit(node.entityId))
+          ) {
             event.waitUntil(recordProductVisit(req, node.entityId));
           }
 
@@ -435,7 +455,7 @@ export const withRoutes: ProxyFactory = () => {
         default: {
           const { pathname } = new URL(req.url);
 
-          const cleanPathName = clearLocaleFromPath(pathname, locale);
+          const cleanPathName = clearLocaleFromPath(pathname, localePrefix);
 
           url = `/${locale}${cleanPathName}`;
         }
@@ -449,6 +469,27 @@ export const withRoutes: ProxyFactory = () => {
       // @ts-expect-error auth() overload expects middleware return type, but we return NextResponse directly for the proxy
     })(request, event);
 };
+
+// `ProductViewed` is a mutation BigCommerce can't cache, so refreshes and
+// repeat hits on the same PDP would otherwise each send one. Decided before the
+// response so the cookie update ships with it.
+async function isFirstViewInVisit(productId: number) {
+  const visitId = await getVisitIdCookie();
+
+  if (!visitId) {
+    return false;
+  }
+
+  const productViews = addProductView(await getProductViewsCookie(), visitId, productId);
+
+  if (!productViews) {
+    return false;
+  }
+
+  await setProductViewsCookie(productViews);
+
+  return true;
+}
 
 async function recordProductVisit(request: Request, productId: number) {
   const visitId = await getVisitIdCookie();

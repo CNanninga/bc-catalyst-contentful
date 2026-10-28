@@ -5,6 +5,7 @@ import { testEnv } from '~/tests/environment';
 export default defineConfig({
   testDir: './tests',
   outputDir: './.tests/test-results',
+  globalSetup: './tests/global-setup.ts',
   workers: 1, // TODO: Implement parallel workers in the future
   expect: {
     toHaveScreenshot: {
@@ -29,9 +30,18 @@ export default defineConfig({
   projects: [
     {
       name: 'tests-chromium',
-      testIgnore: /.*\.mobile\.spec\.ts$/,
+      testIgnore: [
+        /.*\.mobile\.spec\.ts$/,
+        // The homepage is rendered entirely from Makeswift, so these canary specs, which assert
+        // Catalyst's native featured/newest/newsletter sections, can't pass against it.
+        /e2e\/home\.spec\.ts$/,
+        /e2e\/subscribe\.spec\.ts$/,
+      ],
       use: {
         ...devices['Desktop Chrome'],
+        // The headless shell reports "HeadlessChrome" in sec-ch-ua, which BigCommerce treats as a
+        // crawler and rejects on checkout session-sync. Full Chromium's headless mode doesn't.
+        channel: 'chromium',
         launchOptions: {
           // When redirected to checkout, BigCommerce blocks preflight requests from a HeadlessChrome user agent.
           // We need to disable web security to allow the preflight request to go through.

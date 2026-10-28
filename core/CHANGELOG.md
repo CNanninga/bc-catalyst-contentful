@@ -1,5 +1,67 @@
 # Changelog
 
+## 1.13.1
+
+### Patch Changes
+
+- [#3299](https://github.com/bigcommerce/catalyst/pull/3299) [`b9e4ce7`](https://github.com/bigcommerce/catalyst/commit/b9e4ce785dab7a71de35b7216b4a802c17209c48) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Cache `/api/products/[entityId]` for guest shoppers, and skip the BigCommerce customer group request in `/api/customer/group` when no shopper is logged in.
+
+- [#3301](https://github.com/bigcommerce/catalyst/pull/3301) [`63d20e7`](https://github.com/bigcommerce/catalyst/commit/63d20e76df844a568f1b0a4708a3730b150099a5) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Cache Makeswift "page not found" lookups (and missing-locale component lookups) for up to five minutes, cleared on publish, so requests for unknown paths no longer cost an uncached Makeswift API call each. Draft mode is unaffected.
+
+- [#3293](https://github.com/bigcommerce/catalyst/pull/3293) [`da4e5d6`](https://github.com/bigcommerce/catalyst/commit/da4e5d6da285e85128dafdb0f9fd95241650d0d6) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Only serve `/api/customer/groups` in a Makeswift builder session; return `403` otherwise.
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.13.1` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.13.1` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/6faa4b576a74097cec827a7fd5c0ec925f85d738/core/CHANGELOG.md#1131).
+
+## 1.13.0
+
+### Minor Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.13.0` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.13.0` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/aabde65d0e93d40cc8faf3f5b19ae36a53dc1d21/core/CHANGELOG.md#1130).
+
+### Patch Changes
+
+- [#3270](https://github.com/bigcommerce/catalyst/pull/3270) [`31e3630`](https://github.com/bigcommerce/catalyst/commit/31e363082238fbb59b210a9eef09fadff56a80c0) Thanks [@rodrigomf24](https://github.com/rodrigomf24)! - Upgrade @makeswift/runtime from 0.28.5 to 0.29.2. The Makeswift revalidate window (MAKESWIFT_REVALIDATE_TARGET) is now applied by the runtime's fetch in lib/makeswift/fetch.ts, since Makeswift#fetchOptions no longer exists.
+
+- [#3288](https://github.com/bigcommerce/catalyst/pull/3288) [`8a107a9`](https://github.com/bigcommerce/catalyst/commit/8a107a98d743a2ab3cb2649e12cd133f4b355d5b) Thanks [@jorgemoya](https://github.com/jorgemoya)! - Fall back to the default locale's Makeswift components (such as the site header, footer and theme) when the Makeswift site hasn't added the storefront's locale. Since `@makeswift/runtime` 0.29, these requests fail for such locales, which broke every page in them.
+
+## 1.12.2
+
+### Patch Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.12.2` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.12.2` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/6925320731cc6b299f727cdf70e7b8650d23aecb/core/CHANGELOG.md#1122).
+
+## 1.12.1
+
+### Patch Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.12.1` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.12.1` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/2a00cfdbb4280da744e4e1c5d686c525ce497b6c/core/CHANGELOG.md#1121).
+
+## 1.12.0
+
+### Minor Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.12.0` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.12.0` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/d15df6799d8928ce3be663094a573097832ef8f7/core/CHANGELOG.md#1120).
+
+## 1.11.1
+
+### Patch Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.11.1` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.11.1` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/b9e46a09956a1b6ffdf6e91028ccd5c09a6b09be/core/CHANGELOG.md#1111).
+
+## 1.11.0
+
+### Minor Changes
+
+- Pulls in changes from the `@bigcommerce/catalyst-core@1.11.0` release. For more information about what was included in the `@bigcommerce/catalyst-core@1.11.0` release, see the [changelog entry](https://github.com/bigcommerce/catalyst/blob/8f486d35c8c29f04745bbcefb1d32646496e077d/core/CHANGELOG.md#1110).
+
+### Patch Changes
+
+- [#3185](https://github.com/bigcommerce/catalyst/pull/3185) [`96af6d9`](https://github.com/bigcommerce/catalyst/commit/96af6d94db4fc99f2d316254555e1589c472115a) Thanks [@jordanarldt](https://github.com/jordanarldt)! - Declare a revalidate window for Makeswift API requests, and add `MAKESWIFT_REVALIDATE_TARGET` to configure it.
+
+  The Makeswift SDK tags its responses with `@@makeswift` but never declares a TTL. Under the `fetchCache = 'default-cache'` segment config, Next.js reads "no cache config" as "cache forever", so published content was cached indefinitely and only the `site.published` webhook could refresh it. On any host Makeswift cannot reach — a local dev server, or a deployment it isn't configured to notify — content froze permanently, and deleting `.next` was the only way to see an edit.
+
+  Requests for the published site now declare a revalidate window: 3600 seconds by default, or 0 in development, where the webhook never arrives and the TTL is the only invalidation. Draft-mode requests are unchanged; they already opt out of caching, and adding a revalidate value there would trip Next.js's conflicting-config rule and cache the builder's live edits indefinitely.
+
 ## 1.10.0
 
 ### Minor Changes
