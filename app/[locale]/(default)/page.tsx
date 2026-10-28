@@ -39,7 +39,6 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <h1>Storefront Hosting</h1>
       <CmsContent blocks={streamableCmsContent} className="mx-8" />
       <MakeswiftPage locale={locale} path="/" />
     </>
